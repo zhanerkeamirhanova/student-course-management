@@ -35,7 +35,7 @@
         nav .logo { font-size: 24px; font-weight: bold; color: white; }
         nav .logo span { color: var(--green-accent); }
         nav ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
-        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
         nav ul li a:hover { color: var(--green-accent); }
 
         .btn-login {
@@ -46,6 +46,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
+            transition: all 0.3s;
         }
 
         .btn-login:hover { background-color: var(--green-accent); color: var(--navy-bg); }
@@ -59,7 +60,8 @@
 
         .hero h1 { font-size: 42px; margin-bottom: 20px; font-weight: 800; }
         .hero p { font-size: 18px; color: #94a3b8; max-width: 600px; margin: 0 auto 30px auto; }
-        .btn-main { background-color: var(--green-accent); color: var(--navy-bg); padding: 12px 30px; border-radius: 6px; font-weight: bold; text-decoration: none; display: inline-block; }
+        .btn-main { background-color: var(--green-accent); color: var(--navy-bg); padding: 12px 30px; border-radius: 6px; font-weight: bold; text-decoration: none; display: inline-block; cursor: pointer; border: none; font-size: 16px; }
+        .btn-main:hover { background-color: var(--green-hover); }
 
         .container { width: 90%; max-width: 1200px; margin: 50px auto; }
         .section-title { text-align: center; font-size: 28px; color: var(--dark-blue); margin-bottom: 10px; }
@@ -89,9 +91,46 @@
 
         .cta-section { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 60px 25px; text-align: center; border-radius: 12px; margin-bottom: 40px; }
         .cta-form { margin-top: 25px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .cta-input { padding: 12px 20px; border-radius: 6px; border: none; width: 300px; }
+        .cta-input { padding: 12px 20px; border-radius: 6px; border: none; width: 300px; font-size: 14px; }
 
         footer { background-color: var(--dark-blue); color: #94a3b8; padding: 30px 5%; text-align: center; font-size: 14px; border-top: 1px solid #334155; }
+
+        /* ТЕРЕЗЕ (MODAL WINDOW) СТИЛЬДЕРІ */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-box {
+            background: white; padding: 35px; border-radius: 12px;
+            width: 90%; max-width: 400px; text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            position: relative; transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        .modal-box h2 { margin-top: 0; color: var(--dark-blue); }
+        .modal-box p { color: var(--text-light); margin-bottom: 25px; font-size: 14px; }
+        .modal-box input {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;
+        }
+        .modal-box .btn-submit {
+            width: 100%; background-color: var(--green-accent);
+            color: var(--navy-bg); padding: 12px; border: none;
+            border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px;
+        }
+        .modal-box .btn-submit:hover { background-color: var(--green-hover); }
+        .close-modal {
+            position: absolute; top: 15px; right: 20px;
+            font-size: 24px; cursor: pointer; color: var(--text-light);
+        }
+        .close-modal:hover { color: var(--text-dark); }
     </style>
 </head>
 <body>
@@ -104,13 +143,13 @@
             <li><a href="#">Кесте</a></li>
             <li><a href="#">Байланыс</a></li>
         </ul>
-        <button class="btn-login">Кіру</button>
+        <button class="btn-login" onclick="openModal('Жүйеге кіру', 'Өз аккаунтыңызға кіру үшін логин мен құпия сөзді енгізіңіз.')">Кіру</button>
     </nav>
 
     <div class="hero">
         <h1>Оқу процесін толық автоматтандыру</h1>
         <p>Барлық курстар бір жерде, ыңғайлы интерфейс пен нақты уақыттағы академиялық прогресті бақылау жүйесі.</p>
-        <a href="#register" class="btn-main">Тіркелу →</a>
+        <button class="btn-main" onclick="openModal('Жүйеге тіркелу', 'EduTrack платформасына жаңа студент ретінде тіркелу.')">Тіркелу →</button>
     </div>
 
     <div class="container">
@@ -131,12 +170,7 @@
             <div class="course-card">
                 <div class="tag">Frontend (8 апта)</div>
                 <h3>HTML / CSS / JavaScript</h3>
-                <p>Веб-беттер жасаудың толық негіздері, адаптивті дизайн құру және интерактивті элементтер қосу.</p>
-            </div>
-            <div class="course-card">
-                <div class="tag">Framework (8 апта)</div>
-                <h3>React.js негіздері</h3>
-                <p>Компоненттер, hooks, state management және заманауи frontend архитектурасы.</p>
+                <p>Веб-беттер жасаудың толық негедері, адаптивті дизайн құру және интерактивті элементтер қосу.</p>
             </div>
         </div>
 
@@ -200,19 +234,47 @@
             </div>
         </div>
 
-        <div id="register" class="cta-section">
+        <div class="cta-section">
             <h2>Қазір Бастаңыз — Оқуды Ақылды Жасаңыз</h2>
             <p>Жүйеге тегін тіркеліп, барлық курстарыңыз бен прогресіңізді бір жерден тиімді басқарыңыз.</p>
             <div class="cta-form">
-                <input type="email" class="cta-input" placeholder="email@student.kz">
-                <a href="#" class="btn-main" style="margin: 0;">Тіркелу →</a>
+                <input type="email" id="ctaEmail" class="cta-input" placeholder="email@student.kz">
+                <button class="btn-main" onclick="openModal('Жүйеге тіркелу', 'EduTrack платформасына жаңа студент ретінде тіркелу.')" style="margin: 0;">Тіркелу →</button>
             </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Жүйеге кіру</h2>
+            <p id="modalDesc">Мәліметтерді енгізіңіз.</p>
+            <input type="text" placeholder="Студент ID немесе Email">
+            <input type="password" placeholder="Құпия сөз">
+            <button class="btn-submit" onclick="submitForm()">Растау</button>
         </div>
     </div>
 
     <footer>
         <p>© 2026 EduTrack Студент Курс Жүйесі. Барлық құқықтар қорғалған.</p>
     </footer>
+
+    <script>
+        function openModal(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function submitForm() {
+            alert('Сәтті! Мәліметтер қабылданды (Дерекқормен байланыс орнатылуда...)');
+            closeModal();
+        }
+    </script>
 
 </body>
 </html>
