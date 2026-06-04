@@ -61,41 +61,55 @@
         .btn-main { background-color: var(--green-accent); color: var(--navy-bg); padding: 12px 30px; border-radius: 6px; font-weight: bold; text-decoration: none; display: inline-block; cursor: pointer; border: none; font-size: 16px; }
 
         .container { width: 90%; max-width: 1200px; margin: 50px auto; }
-        .section-title { text-align: center; font-size: 28px; color: var(--dark-blue); margin-bottom: 10px; }
+        .section-title { text-align: center; font-size: 28px; color: var(--dark-blue); margin-bottom: 10px; font-weight: bold; }
         .section-subtitle { text-align: center; color: var(--text-light); margin-bottom: 40px; }
 
-        .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 60px; }
-        .course-card { background: var(--card-bg); border-radius: 10px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid var(--green-accent); }
-        .course-card .tag { font-size: 12px; font-weight: bold; color: var(--green-accent); margin-bottom: 10px; }
+        /* КУРСТАР СЕКЦИЯСЫ */
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .course-card { background: var(--card-bg); border-radius: 10px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid var(--green-accent); position: relative; }
+        .course-card .tag { font-size: 12px; font-weight: bold; color: var(--green-accent); margin-bottom: 10px; text-transform: uppercase; }
         .course-card h3 { margin: 0 0 12px 0; color: var(--dark-blue); }
+        .course-card p { color: var(--text-light); font-size: 14px; line-height: 1.5; }
 
+        /* КЕСТЕ ЖӘНЕ ТІЗІМ КЕСТЕЛЕРІ */
         .table-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 40px; overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th, td { padding: 15px; border-bottom: 1px solid #e2e8f0; }
-        th { background-color: #f1f5f9; color: var(--dark-blue); }
+        th { background-color: #f1f5f9; color: var(--dark-blue); font-weight: 600; }
 
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
         .badge.active { background-color: #dcfce7; color: #15803d; }
         .badge.offline { background-color: #ffeeeb; color: #ea580c; }
+        .badge.waiting { background-color: #fef9c3; color: #a16207; }
 
-        /* ЖЕКЕ КАБИНЕТ СЕКЦИЯСЫ */
+        /* ПІКІРЛЕР СЕКЦИЯСЫ */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .testimonial-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); border-left: 4px solid #cbd5e1; }
+        .testimonial-card p { font-style: italic; color: var(--text-dark); }
+        .testimonial-card .author { font-weight: bold; margin-top: 15px; color: var(--dark-blue); font-size: 14px; }
+
+        /* ДИНАМИКАЛЫҚ ЖЕКЕ КАБИНЕТ */
         #dashboard-section { display: none; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); margin-bottom: 50px; border-left: 6px solid var(--green-accent); }
-        .welcome-msg { font-size: 24px; color: var(--dark-blue); margin-bottom: 20px; font-weight: bold; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .welcome-msg { font-size: 26px; color: var(--dark-blue); margin-bottom: 20px; font-weight: bold; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: #f8fafc; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; }
         .stat-card h4 { margin: 0; color: var(--text-light); font-size: 14px; }
         .stat-card p { margin: 10px 0 0 0; font-size: 28px; font-weight: bold; color: var(--dark-blue); }
 
-        /* ІЗДЕУ КҮЙІ */
-        .search-box { padding: 10px; width: 100%; max-width: 300px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+        /* ІЗДЕУ КҮЙІ ЖӘНЕ СЕЛЕКТТЕР */
+        .search-box, .modal-box select, .modal-box input { padding: 12px; width: 100%; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .search-box { max-width: 300px; }
 
         /* МОДАЛЬДЫҚ ТЕРЕЗЕ */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 1000; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-box { background: white; padding: 35px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; position: relative; }
-        .modal-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
-        .modal-box .btn-submit { width: 100%; background-color: var(--green-accent); color: var(--navy-bg); padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .modal-box { background: white; padding: 35px; border-radius: 12px; width: 90%; max-width: 420px; text-align: center; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .modal-box h2 { margin-top: 0; color: var(--dark-blue); }
+        .modal-box .btn-submit { width: 100%; background-color: var(--green-accent); color: var(--navy-bg); padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .modal-box .btn-submit:hover { background-color: var(--green-hover); }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-light); }
+
+        footer { background-color: var(--dark-blue); color: #94a3b8; text-align: center; padding: 30px 5%; font-size: 14px; border-top: 1px solid #334155; }
     </style>
 </head>
 <body>
@@ -103,23 +117,24 @@
     <nav>
         <div class="logo">EduTrack<span>.</span></div>
         <ul>
-            <li><a href="#">Басты бет</a></li>
-            <li><a href="#">Курстар</a></li>
+            <li><a href="#courses-sec">Курстар</a></li>
+            <li><a href="#schedule-sec">Кесте</a></li>
+            <li><a href="#students-sec">Студенттер тізімі</a></li>
         </ul>
-        <button class="btn-login" id="loginNavBtn" onclick="openModal('Жүйеге кіру', 'Тексеру үшін мына есімдердің бірін жазсаңыз болады: Асхат, Аружан, Диас')">Кіру</button>
+        <button class="btn-login" id="loginNavBtn" onclick="openModal('Жүйеге кіру', 'Платформаға кіру үшін атыңызды жазыңыз.', 'login')">Кіру</button>
     </nav>
 
     <div class="hero" id="hero-banner">
         <h1>Оқу процесін толық автоматтандыру</h1>
-        <p>Платформаға кіріп, өз атыңыз бойынша жеке нәтижелеріңіз бен топтағы студенттер тізімін көріңіз.</p>
-        <button class="btn-main" onclick="openModal('Жүйеге кіру', 'Атыңызды жазып, жүйені іске қосыңыз.')">Платформаны ашу →</button>
+        <p>Жүйеге тіркеліп, өз курсыңызды таңдаңыз және топтағы студенттер тізіміне бірден қосылыңыз!</p>
+        <button class="btn-main" onclick="openModal('Жүйеге жаңа студент тіркеу', 'Аты-жөніңізді жазып, оқитын курсыңызды таңдаңыз:', 'register')">Тіркелу →</button>
     </div>
 
     <div class="container">
         
         <div id="dashboard-section">
             <div class="welcome-msg" id="userWelcome">Қош келдіңіз!</div>
-            <p style="color: var(--text-light); margin-bottom: 25px;">Сіздің жеке академиялық көрсеткіштеріңіз:</p>
+            <p style="color: var(--text-light); margin-bottom: 25px;">Сіздің жеке академиялық көрсеткіштеріңіз бен таңдаған бағытыңыз:</p>
             
             <div class="stats-grid">
                 <div class="stat-card">
@@ -131,14 +146,14 @@
                     <p id="userAttendance">0%</p>
                 </div>
                 <div class="stat-card">
-                    <h4>Таңдаған пәндері</h4>
-                    <p id="userCourseCount">0 Пән</p>
+                    <h4>Таңдалған бағыт</h4>
+                    <p id="userCourseCount" style="font-size: 18px; margin-top: 15px; color: var(--dark-blue); font-weight: 600;">Жүктелуде...</p>
                 </div>
             </div>
             
-            <h3 style="color: var(--dark-blue);">Менің бағаларым</h3>
+            <h3 style="color: var(--dark-blue);">Менің ағымдағы бағаларым</h3>
             <div class="table-container">
-                <table id="gradesTable">
+                <table>
                     <thead>
                         <tr>
                             <th>Пән атауы</th>
@@ -152,41 +167,107 @@
                         </tbody>
                 </table>
             </div>
-
-            <h3 style="color: var(--dark-blue); margin-top: 40px;">Топтағы студенттер тізімі (Іздеу жүйесімен)</h3>
-            <p style="color: var(--text-light); font-size: 14px;">Топтас студенттерді аты бойынша жылдам іздеу:</p>
-            <input type="text" id="searchInput" class="search-box" onkeyup="filterStudents()" placeholder="Студент атын жазыңыз...">
-            
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID Студент</th>
-                            <th>Аты-жөні</th>
-                            <th>Мамандығы</th>
-                            <th>Оқу түрі</th>
-                            <th>Жүйедегі күйі</th>
-                        </tr>
-                    </thead>
-                    <tbody id="studentListBody">
-                        </tbody>
-                </table>
-            </div>
         </div>
 
-        <h2 class="section-title">Платформадағы негізгі бағыттар</h2>
+        <h2 class="section-title" id="courses-sec">Қолжетімді Курстар</h2>
+        <p class="section-subtitle">Бағдарлама бойынша барлық курстарды қараңыз және тіркеліңіз.</p>
         <div class="course-grid">
             <div class="course-card">
-                <div class="tag">Backend Development</div>
-                <h3>Python & FastAPI</h3>
-                <p>Веб-серверлер құру, дерекқормен жұмыс және API архитектурасы.</p>
+                <div class="tag">Backend</div>
+                <h3>Python программалау</h3>
+                <p>Негіздерден бастап FastAPI және Flask фреймворктеріне дейінгі заманауи веб-жобалар.</p>
             </div>
             <div class="course-card">
-                <div class="tag">Database Administration</div>
-                <h3>SQL & PostgreSQL</h3>
-                <p>Деректерді моделдеу, реляциялық кестелер және сұраныстарды оңтайландыру.</p>
+                <div class="tag">Database</div>
+                <h3>Дерекқорларға кіріспе</h3>
+                <p>SQL, PostgreSQL қауіпсіз сақтау және сұраныстарды оңтайландыру.</p>
+            </div>
+            <div class="course-card">
+                <div class="tag">Frontend</div>
+                <h3>HTML / CSS / JavaScript</h3>
+                <p>Веб-беттер жасаудың толық негіздері мен заманауи интерактивті тәсілдері.</p>
             </div>
         </div>
+
+        <h2 class="section-title" id="schedule-sec">Апталық Сабақ Кестесі</h2>
+        <p class="section-subtitle">Осы аптаның ағымдағы дәрістері мен зертханалық жұмыстары</p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Уақыт</th>
+                        <th>Курс</th>
+                        <th>Тақырып</th>
+                        <th>Мұғалім</th>
+                        <th>Бөлме</th>
+                        <th>Күйі</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>09:00</td>
+                        <td>Python</td>
+                        <td>FastAPI Маршруттары</td>
+                        <td>А. Сейткали</td>
+                        <td>Lab-201</td>
+                        <td><span class="badge active">БЕЛСЕНДІ</span></td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td>SQL Дерекқорлар</td>
+                        <td>JOIN операциялары</td>
+                        <td>Б. Нұрланов</td>
+                        <td>Lab-105</td>
+                        <td><span class="badge waiting">КҮТУДЕ</span></td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td>Git & GitHub</td>
+                        <td>Pull Request жасау</td>
+                        <td>С. Қасымов</td>
+                        <td>Online</td>
+                        <td><span class="badge offline">АЯҚТАЛДЫ</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title" id="students-sec">Топтағы студенттер тізімі</h2>
+        <p class="section-subtitle">Жүйеге тіркелген және оқып жатқан белсенді студенттердің ресми тізімі</p>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterStudents()" placeholder="Студент атын іздеу...">
+            <button class="btn-main" style="padding: 8px 15px; font-size: 14px;" onclick="clearLocalStorage()">Тізімді тазалау (Сброс)</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Студент</th>
+                        <th>Аты-жөні</th>
+                        <th>Таңдаған Курсы / Мамандығы</th>
+                        <th>Оқу түрі</th>
+                        <th>Статусы</th>
+                    </tr>
+                </thead>
+                <tbody id="studentListBody">
+                    </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title">Студент Пікірлері</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p>"EduTrack арқылы барлық курстарымды бақылау өте оңай болды. Прогресс графигі мені үнемі ынталандырып отырады."</p>
+                <div class="author">Дамила Хамитова — Backend бағыты</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"Кесте жоспарлаушы өте ыңғайлы. Сабақтарды ешқашан жіберіп алмаймын, хабарландырулар уақытында келеді."</p>
+                <div class="author">Аружан Юсупбай — Frontend бағыты</div>
+            </div>
+        </div>
+
     </div>
 
     <div class="modal-overlay" id="modal">
@@ -194,151 +275,191 @@
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2 id="modalTitle">Жүйеге кіру</h2>
             <p id="modalDesc">Мәлімет енгізіңіз.</p>
-            <input type="text" id="usernameInput" placeholder="Атыңызды жазыңыз (мысалы: Аружан немесе Асхат)">
-            <button class="btn-submit" onclick="loginAction()">Жүйеге кіру</button>
+            
+            <input type="text" id="usernameInput" placeholder="Атыңызды жазыңыз...">
+            
+            <div id="courseSelectContainer" style="display: none; text-align: left;">
+                <label style="font-size: 14px; font-weight: 600; color: var(--dark-blue); display: block; margin-bottom: 5px;">Оқитын курсыңызды таңдаңыз:</label>
+                <select id="courseSelect">
+                    <option value="Python Backend Developer">Python программалау (Backend)</option>
+                    <option value="SQL Database Administrator">SQL Дерекқорлар (Database)</option>
+                    <option value="Frontend Web Developer">HTML/CSS/JavaScript (Frontend)</option>
+                    <option value="Fullstack Developer">Fullstack Инженерия</option>
+                </select>
+            </div>
+            
+            <button class="btn-submit" style="margin-top: 15px;" onclick="handleFormSubmit()">Растау (Жүйеге жіберу)</button>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 EduTrack Автоматтандырылған Студенттік Жүйесі.</p>
+        <p>© 2026 EduTrack Студент Курс Жүйесі. Барлық құқықтар қорғалған.</p>
     </footer>
 
     <script>
-        // 💾 СТУДЕНТТЕРДІҢ ӘР ТҮРЛІ МӘЛІМЕТТЕР ҚОРЫ (ДЕРЕКҚОР СИЯҚТЫ)
-        const studentsDatabase = {
-            "асхат": {
-                fullName: "Асхат Мұратұлы",
-                gpa: "3.92",
-                attendance: "98%",
-                courses: 3,
-                grades: [
-                    { name: "Python (FastAPI)", r1: 98, r2: 95, exam: 94, total: "96 (A)" },
-                    { name: "SQL Дерекқорлар", r1: 92, r2: 94, exam: 90, total: "92 (A)" },
-                    { name: "Git & GitHub", r1: 100, r2: 98, exam: 95, total: "97 (A)" }
-                ]
-            },
-            "аружан": {
-                fullName: "Аружан Серікқызы",
-                gpa: "3.55",
-                attendance: "92%",
-                courses: 2,
-                grades: [
-                    { name: "Python (FastAPI)", r1: 85, r2: 88, exam: 82, total: "84 (B+)" },
-                    { name: "SQL Дерекқорлар", r1: 90, r2: 85, exam: 88, total: "87 (A-)" }
-                ]
-            },
-            "диас": {
-                fullName: "Диас Ахметов",
-                gpa: "2.84",
-                attendance: "81%",
-                courses: 2,
-                grades: [
-                    { name: "Python (FastAPI)", r1: 70, r2: 68, exam: 75, total: "72 (C+)" },
-                    { name: "SQL Дерекқорлар", r1: 65, r2: 72, exam: 68, total: "68 (C)" }
-                ]
-            }
+        // 💾 Базадағы бұрыннан бар студенттердің академиялық мәліметтері
+        const staticDatabase = {
+            "асхат": { fullName: "Асхат Мұратұлы", gpa: "3.92", attendance: "98%", course: "Python Backend Developer", grades: [{ name: "Python (FastAPI)", r1: 98, r2: 95, exam: 94, total: "96 (A)" }, { name: "SQL Дерекқорлар", r1: 92, r2: 94, exam: 90, total: "92 (A)" }] },
+            "аружан": { fullName: "Аружан Серікқызы", gpa: "3.55", attendance: "92%", course: "Frontend Web Developer", grades: [{ name: "HTML/CSS/JS", r1: 85, r2: 88, exam: 82, total: "84 (B+)" }] },
+            "диас": { fullName: "Диас Ахметов", gpa: "2.84", attendance: "81%", course: "SQL Database Administrator", grades: [{ name: "SQL Дерекқорлар", r1: 70, r2: 68, exam: 75, total: "72 (C+)" }] }
         };
 
-        // 👥 СТУДЕНТТЕРДІҢ ЖАЛПЫ ТІЗІМІ (СПИСОК)
-        const generalStudentList = [
-            { id: "ST-1024", name: "Асхат Мұратұлы", major: "Information Technology", type: "Грант", status: "ONLINE" },
-            { id: "ST-1025", name: "Аружан Серікқызы", major: "Data Science", type: "Грант", status: "ONLINE" },
-            { id: "ST-1026", name: "Диас Ахметов", major: "Computer Engineering", type: "Ақылы", status: "OFFLINE" },
-            { id: "ST-1027", name: "Ерасыл Болатұлы", major: "Information Technology", type: "Грант", status: "OFFLINE" },
-            { id: "ST-1028", name: "Мадина Омарова", major: "Cybersecurity", type: "Ақылы", status: "ONLINE" },
-            { id: "ST-1029", name: "Нұрсұлтан Әлібек", major: "Software Engineering", type: "Грант", status: "ONLINE" }
+        // 👥 СТУДЕНТТЕРДІҢ БАСТАПҚЫ РЕСМИ ТІЗІМІ
+        const initialStudents = [
+            { id: "ST-1024", name: "Асхат Мұратұлы", major: "Python Backend Developer", type: "Грант", status: "ONLINE" },
+            { id: "ST-1025", name: "Аружан Серікқызы", major: "Frontend Web Developer", type: "Грант", status: "ONLINE" },
+            { id: "ST-1026", name: "Диас Ахметов", major: "SQL Database Administrator", type: "Ақылы", status: "OFFLINE" },
+            { id: "ST-1027", name: "Ерасыл Болатұлы", major: "Python Backend Developer", type: "Грант", status: "OFFLINE" },
+            { id: "ST-1028", name: "Мадина Омарова", major: "Cybersecurity", type: "Ақылы", status: "ONLINE" }
         ];
 
-        function openModal(title, desc) {
+        // Динамикалық тізімді LocalStorage-тан оқу, егер бос болса бастапқы тізімді алу
+        let globalStudentList = JSON.parse(localStorage.getItem('eduTrack_students_saved')) || initialStudents;
+        let actionType = 'login'; 
+
+        // Терезені ашу
+        function openModal(title, desc, type) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalDesc').innerText = desc;
             document.getElementById('modal').classList.add('active');
+            actionType = type;
+
+            if (type === 'register') {
+                document.getElementById('courseSelectContainer').style.display = 'block';
+                document.getElementById('usernameInput').placeholder = "Жаңа студенттің аты-жөні...";
+            } else {
+                document.getElementById('courseSelectContainer').style.display = 'none';
+                document.getElementById('usernameInput').placeholder = "Атыңызды жазыңыз (мысалы: Асхат)...";
+            }
         }
 
         function closeModal() {
             document.getElementById('modal').classList.remove('active');
+            document.getElementById('usernameInput').value = "";
         }
 
-        // 🚀 КІРУ БАТЫРМАСЫН БАСҚАНДАҒЫ ДИНАМИКАЛЫҚ ПРОЦЕСС
-        function loginAction() {
+        // БАТЫРМАНЫ БАСҚАНДАҒЫ НЕГІЗГІ ПРОЦЕСС
+        function handleFormSubmit() {
             let inputName = document.getElementById('usernameInput').value.trim();
-            if (!inputName) { inputName = "Асхат"; } // Егер бос жіберсе автоматты Асхат болады
-            
-            let key = inputName.toLowerCase();
-            let userData;
+            if (!inputName) { alert("Өтініш, есімді толық жазыңыз!"); return; }
 
-            // Егер базада бар студент болса соны алады, жоқ болса жаңа кездейсоқ студент жасайды
-            if (studentsDatabase[key]) {
-                userData = studentsDatabase[key];
-            } else {
-                userData = {
-                    fullName: inputName + " (Жаңа студент)",
-                    gpa: "3.20",
-                    attendance: "90%",
-                    courses: 2,
+            let key = inputName.toLowerCase();
+            let finalUserData;
+
+            if (actionType === 'register') {
+                // 1. Жаңа таңдаған курсын алу
+                let selectedCourse = document.getElementById('courseSelect').value;
+                let newId = "ST-" + (1024 + globalStudentList.length);
+
+                // 2. Жаңа студент нысанын жасап, ТІЗІМГЕ ҚОСУ
+                let newStudentObj = {
+                    id: newId,
+                    name: inputName,
+                    major: selectedCourse,
+                    type: "Ақылы",
+                    status: "ONLINE"
+                };
+
+                globalStudentList.push(newStudentObj);
+                // Жаңа тізімді браузер жадына сақтау (Жаңартқанда өшпеу үшін)
+                localStorage.setItem('eduTrack_students_saved', JSON.stringify(globalStudentList));
+
+                // 3. Жеке кабинетке арналған жаңа баға парағы
+                finalUserData = {
+                    fullName: inputName,
+                    gpa: "4.00",
+                    attendance: "100%",
+                    course: selectedCourse,
                     grades: [
-                        { name: "Python (FastAPI)", r1: 80, r2: 85, exam: 80, total: "81 (B)" },
-                        { name: "SQL Дерекқорлар", r1: 85, r2: 80, exam: 82, total: "82 (B)" }
+                        { name: selectedCourse.split(" ")[0] + " негіздері", r1: 100, r2: 100, exam: 100, total: "100 (A)" }
                     ]
                 };
+                alert(`Құттықтаймыз! ${inputName} жүйеге тіркеліп, "${selectedCourse}" курсының студенттер қатарына қосылды!`);
+            } else {
+                // КІРУ ЛОГИКАСЫ
+                if (staticDatabase[key]) {
+                    finalUserData = staticDatabase[key];
+                } else {
+                    // Тіркелгендер тізімінен іздеу
+                    let found = globalStudentList.find(s => s.name.toLowerCase() === key);
+                    finalUserData = {
+                        fullName: found ? found.name : inputName,
+                        gpa: "3.45",
+                        attendance: "95%",
+                        course: found ? found.major : "Python Backend Developer",
+                        grades: [{ name: "Таңдалған пән бойынша дәріс", r1: 85, r2: 90, exam: 88, total: "87 (A-)" }]
+                    };
+                }
             }
 
             closeModal();
 
-            // Интерфейсті өзгерту
+            // Жеке кабинетті көрсету
             document.getElementById('hero-banner').style.display = 'none';
             document.getElementById('dashboard-section').style.display = 'block';
-            
-            // Жеке мәліметтерді қою
-            document.getElementById('userWelcome').innerText = "Қош келдіңіз, " + userData.fullName + "!";
-            document.getElementById('userGPA').innerText = userData.gpa;
-            document.getElementById('userAttendance').innerText = userData.attendance;
-            document.getElementById('userCourseCount').innerText = userData.courses + " Пән";
-            document.getElementById('loginNavBtn').innerText = "Шығу";
 
-            // Бағалар кестесін толтыру
+            document.getElementById('userWelcome').innerText = "Қош келдіңіз, " + finalUserData.fullName + "!";
+            document.getElementById('userGPA').innerText = finalUserData.gpa;
+            document.getElementById('userAttendance').innerText = finalUserData.attendance;
+            document.getElementById('userCourseCount').innerText = finalUserData.course;
+            
+            // "Кіру" батырмасын "Шығу" қылып өзгерту
+            document.getElementById('loginNavBtn').innerText = "Шығу";
+            document.getElementById('loginNavBtn').setAttribute('onclick', 'location.reload()');
+
+            // Жеке бағаларын кестеге салу
             let gradesBody = document.getElementById('gradesBody');
             gradesBody.innerHTML = "";
-            userData.grades.forEach(item => {
-                let row = `<tr>
-                    <td>${item.name}</td>
-                    <td>${item.r1}</td>
-                    <td>${item.r2}</td>
-                    <td>${item.exam}</td>
-                    <td><b>${item.total}</b></td>
+            finalUserData.grades.forEach(g => {
+                gradesBody.innerHTML += `<tr>
+                    <td>${g.name}</td>
+                    <td>${g.r1}</td>
+                    <td>${g.r2}</td>
+                    <td>${g.exam}</td>
+                    <td><b>${g.total}</b></td>
                 </tr>`;
-                gradesBody.innerHTML += row;
             });
 
-            // Студенттер тізімін (список) толтыру
-            renderStudentList(generalStudentList);
-
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            // Тізімді қайта экранға шығару (Жаңа адаммен бірге)
+            renderStudents(globalStudentList);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Тізімді экранға шығару функциясы
-        function renderStudentList(list) {
-            let listBody = document.getElementById('studentListBody');
-            listBody.innerHTML = "";
-            list.forEach(st => {
-                let statusBadge = st.status === "ONLINE" ? '<span class="badge active">ONLINE</span>' : '<span class="badge offline">OFFLINE</span>';
-                let row = `<tr>
-                    <td>${st.id}</td>
-                    <td><b>${st.name}</b></td>
-                    <td>${st.major}</td>
-                    <td>${st.type}</td>
-                    <td>${statusBadge}</td>
+        // Тізімді экрандағы кестеге басып шығару функциясы
+        function renderStudents(list) {
+            let body = document.getElementById('studentListBody');
+            body.innerHTML = "";
+            list.forEach(s => {
+                let badge = s.status === "ONLINE" ? '<span class="badge active">ONLINE</span>' : '<span class="badge offline">OFFLINE</span>';
+                body.innerHTML += `<tr>
+                    <td>${s.id}</td>
+                    <td><b>${s.name}</b></td>
+                    <td>${s.major}</td>
+                    <td>${s.type}</td>
+                    <td>${badge}</td>
                 </tr>`;
-                listBody.innerHTML += row;
             });
         }
 
-        // 🔍 ТІЗІМ ІШІНЕН АТЫ БОЙЫНША ІЗДЕУ (ФИЛЬТР)
+        // Аты бойынша іздеу
         function filterStudents() {
             let text = document.getElementById('searchInput').value.toLowerCase();
-            let filtered = generalStudentList.filter(st => st.name.toLowerCase().includes(text));
-            renderStudentList(filtered);
+            let filtered = globalStudentList.filter(s => s.name.toLowerCase().includes(text));
+            renderStudents(filtered);
         }
+
+        // Локалды жадты тазалап, бастапқы күйге келтіру
+        function clearLocalStorage() {
+            localStorage.removeItem('eduTrack_students_saved');
+            globalStudentList = initialStudents;
+            renderStudents(globalStudentList);
+            alert("Тізім бастапқы қалпына келтірілді!");
+        }
+
+        // Бет жүктелгенде студенттер тізімі бірден дайын тұрады
+        window.onload = function() {
+            renderStudents(globalStudentList);
+        };
     </script>
 </body>
 </html>
