@@ -35,7 +35,7 @@
         nav .logo { font-size: 24px; font-weight: bold; color: white; }
         nav .logo span { color: var(--green-accent); }
         nav ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
-        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        nav ul li a { color: #cbd5e1; text-decoration: none; font-weight: 500; }
         nav ul li a:hover { color: var(--green-accent); }
 
         .btn-login {
@@ -46,9 +46,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
         }
-
         .btn-login:hover { background-color: var(--green-accent); color: var(--navy-bg); }
 
         .hero {
@@ -61,7 +59,6 @@
         .hero h1 { font-size: 42px; margin-bottom: 20px; font-weight: 800; }
         .hero p { font-size: 18px; color: #94a3b8; max-width: 600px; margin: 0 auto 30px auto; }
         .btn-main { background-color: var(--green-accent); color: var(--navy-bg); padding: 12px 30px; border-radius: 6px; font-weight: bold; text-decoration: none; display: inline-block; cursor: pointer; border: none; font-size: 16px; }
-        .btn-main:hover { background-color: var(--green-hover); }
 
         .container { width: 90%; max-width: 1200px; margin: 50px auto; }
         .section-title { text-align: center; font-size: 28px; color: var(--dark-blue); margin-bottom: 10px; }
@@ -71,175 +68,115 @@
         .course-card { background: var(--card-bg); border-radius: 10px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid var(--green-accent); }
         .course-card .tag { font-size: 12px; font-weight: bold; color: var(--green-accent); margin-bottom: 10px; }
         .course-card h3 { margin: 0 0 12px 0; color: var(--dark-blue); }
-        .course-card p { color: var(--text-light); font-size: 14px; line-height: 1.6; }
 
-        .table-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 60px; overflow-x: auto; }
+        .table-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 60px; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th, td { padding: 15px; border-bottom: 1px solid #e2e8f0; }
-        th { background-color: #f1f5f9; color: var(--dark-blue); font-weight: 600; }
+        th { background-color: #f1f5f9; color: var(--dark-blue); }
 
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
         .badge.active { background-color: #dcfce7; color: #15803d; }
-        .badge.waiting { background-color: #fef9c3; color: #a16207; }
-        .badge.completed { background-color: #e2e8f0; color: #475569; }
 
-        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 60px; }
-        .review-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 4px solid var(--dark-blue); }
-        .review-card p { font-style: italic; color: var(--text-dark); line-height: 1.6; }
-        .review-card .author { margin-top: 15px; font-weight: bold; color: var(--dark-blue); }
-        .review-card .role { font-size: 12px; color: var(--text-light); }
+        /* ЖЕКЕ КАБИНЕТ (РЕЗУЛЬТАТТАР) СЕКЦИЯСЫ - БАСТАПҚЫДА ЖАСЫРЫН */
+        #dashboard-section { display: none; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); margin-bottom: 50px; border-left: 6px solid var(--green-accent); }
+        .welcome-msg { font-size: 24px; color: var(--dark-blue); margin-bottom: 20px; font-weight: bold; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .stat-card { background: #f8fafc; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; }
+        .stat-card h4 { margin: 0; color: var(--text-light); font-size: 14px; }
+        .stat-card p { margin: 10px 0 0 0; font-size: 28px; font-weight: bold; color: var(--dark-blue); }
 
-        .cta-section { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 60px 25px; text-align: center; border-radius: 12px; margin-bottom: 40px; }
-        .cta-form { margin-top: 25px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .cta-input { padding: 12px 20px; border-radius: 6px; border: none; width: 300px; font-size: 14px; }
-
-        footer { background-color: var(--dark-blue); color: #94a3b8; padding: 30px 5%; text-align: center; font-size: 14px; border-top: 1px solid #334155; }
-
-        /* ТЕРЕЗЕ (MODAL WINDOW) СТИЛЬДЕРІ */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
+        /* МОДАЛЬДЫҚ ТЕРЕЗЕ */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 1000; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-box {
-            background: white; padding: 35px; border-radius: 12px;
-            width: 90%; max-width: 400px; text-align: center;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            position: relative; transform: translateY(-20px);
-            transition: all 0.3s ease;
-        }
-        .modal-overlay.active .modal-box { transform: translateY(0); }
-        .modal-box h2 { margin-top: 0; color: var(--dark-blue); }
-        .modal-box p { color: var(--text-light); margin-bottom: 25px; font-size: 14px; }
-        .modal-box input {
-            width: 100%; padding: 12px; margin-bottom: 15px;
-            border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;
-        }
-        .modal-box .btn-submit {
-            width: 100%; background-color: var(--green-accent);
-            color: var(--navy-bg); padding: 12px; border: none;
-            border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px;
-        }
-        .modal-box .btn-submit:hover { background-color: var(--green-hover); }
-        .close-modal {
-            position: absolute; top: 15px; right: 20px;
-            font-size: 24px; cursor: pointer; color: var(--text-light);
-        }
-        .close-modal:hover { color: var(--text-dark); }
+        .modal-box { background: white; padding: 35px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; position: relative; }
+        .modal-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+        .modal-box .btn-submit { width: 100%; background-color: var(--green-accent); color: var(--navy-bg); padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-light); }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">EduTrack<span>.</span></div>
-        <ul>
+        <ul id="nav-links">
             <li><a href="#">Курстар</a></li>
-            <li><a href="#">Прогресс</a></li>
             <li><a href="#">Кесте</a></li>
-            <li><a href="#">Байланыс</a></li>
         </ul>
-        <button class="btn-login" onclick="openModal('Жүйеге кіру', 'Өз аккаунтыңызға кіру үшін логин мен құпия сөзді енгізіңіз.')">Кіру</button>
+        <button class="btn-login" id="loginNavBtn" onclick="openModal('Жүйеге кіру', 'Студенттік тіркелгіңізге кіріңіз.')">Кіру</button>
     </nav>
 
-    <div class="hero">
+    <div class="hero" id="hero-banner">
         <h1>Оқу процесін толық автоматтандыру</h1>
         <p>Барлық курстар бір жерде, ыңғайлы интерфейс пен нақты уақыттағы академиялық прогресті бақылау жүйесі.</p>
         <button class="btn-main" onclick="openModal('Жүйеге тіркелу', 'EduTrack платформасына жаңа студент ретінде тіркелу.')">Тіркелу →</button>
     </div>
 
     <div class="container">
-        <h2 class="section-title">Қолжетімді Курстар</h2>
-        <p class="section-subtitle">Бағдарлама бойынша барлық курстарды қараңыз және тіркеліңіз.</p>
         
-        <div class="course-grid">
-            <div class="course-card">
-                <div class="tag">Backend (12 апта)</div>
-                <h3>Python программалау</h3>
-                <p>Негіздерден бастап Flask және FastAPI фреймворктеріне дейін заманауи веб-қосымшалар әзірлеу.</p>
+        <div id="dashboard-section">
+            <div class="welcome-msg" id="userWelcome">Қош келдіңіз, Студент!</div>
+            <p style="color: var(--text-light); margin-bottom: 25px;">Сіздің ағымдағы академиялық үлгеріміңіз бен нәтижелеріңіз:</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Белсенді курстар</h4>
+                    <p>3 Курс</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Жалпы GPA</h4>
+                    <p style="color: var(--green-accent);">3.87</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Қатысу пайызы</h4>
+                    <p>96%</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Жинаған кредиттер</h4>
+                    <p>12 / 20</p>
+                </div>
             </div>
-            <div class="course-card">
-                <div class="tag">Database (10 апта)</div>
-                <h3>Дерекқорларға кіріспе</h3>
-                <p>SQL, PostgreSQL, SQLite деректерді қауіпсіз сақтау, модельдеу және сұраныстарды оңтайландыру жұмыстары.</p>
-            </div>
-            <div class="course-card">
-                <div class="tag">Frontend (8 апта)</div>
-                <h3>HTML / CSS / JavaScript</h3>
-                <p>Веб-беттер жасаудың толық негедері, адаптивті дизайн құру және интерактивті элементтер қосу.</p>
-            </div>
-        </div>
-
-        <h2 class="section-title">Апталық Сабақ Кестесі</h2>
-        <p class="section-subtitle">Осы аптаға арналған ағымдағы және жоспарланған сабақтар тізімі.</p>
-        
-        <div class="table-container">
+            
+            <h3 style="color: var(--dark-blue); margin-top: 30px;">Ағымдағы бағалар журналы</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Уақыт</th>
-                        <th>Курс атауы</th>
-                        <th>Сабақ тақырыбы</th>
-                        <th>Мұғалім</th>
-                        <th>Бөлме</th>
-                        <th>Күйі</th>
+                        <th>Пән атауы</th>
+                        <th>Аралық бақылау (Р1)</th>
+                        <th>Аралық бақылау (Р2)</th>
+                        <th>Емтихан бағасы</th>
+                        <th>Қорытынды (Total)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>09:00</td>
                         <td>Python (FastAPI)</td>
-                        <td>Маршруттар және API құру</td>
-                        <td>А. Сейтқали</td>
-                        <td>Lab-201</td>
-                        <td><span class="badge active">БЕЛСЕНДІ</span></td>
+                        <td>95 / 100</td>
+                        <td>92 / 100</td>
+                        <td>88 / 100</td>
+                        <td><b>91 (А)</b></td>
                     </tr>
                     <tr>
-                        <td>11:00</td>
-                        <td>SQL Database</td>
-                        <td>JOIN күрделі операторлары</td>
-                        <td>Б. Нұрланов</td>
-                        <td>Lab-105</td>
-                        <td><span class="badge waiting">КҮТУДЕ</span></td>
-                    </tr>
-                    <tr>
-                        <td>13:00</td>
-                        <td>Git & GitHub</td>
-                        <td>Pull Request және Командалық жұмыс</td>
-                        <td>С. Қасымов</td>
-                        <td>Online</td>
-                        <td><span class="badge completed">АЯҚТАЛДЫ</span></td>
+                        <td>SQL Дерекқорлар</td>
+                        <td>88 / 100</td>
+                        <td>90 / 100</td>
+                        <td>95 / 100</td>
+                        <td><b>92 (А)</b></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <h2 class="section-title">Студенттер Пікірлері</h2>
-        <p class="section-subtitle">Жүйені белсенді қолданып жүрген білім алушылардың ой-пікірі.</p>
-        
-        <div class="testimonials">
-            <div class="review-card">
-                <p>"EduTrack арқылы барлық курстарымды бақылау өте оңай болды. Прогресс графигі мені үнемі жаңа нәтижелерге ынталандырып отырады."</p>
-                <div class="author">Дамила Хамитова</div>
-                <div class="role">Backend бағыты, 3-курс</div>
+        <h2 class="section-title">Қолжетімді Курстар</h2>
+        <div class="course-grid">
+            <div class="course-card">
+                <div class="tag">Backend</div>
+                <h3>Python программалау</h3>
+                <p>Негіздерден бастап FastAPI фреймворкіне дейінгі заманауи веб-жобалар.</p>
             </div>
-            <div class="review-card">
-                <p>"Кесте жоспарлаушы функциясы өте ыңғайлы жасалған. Сабақтарды ешқашан жіберіп алмаймын, хабарландырулар дер кезінде келеді."</p>
-                <div class="author">Аяужан Юсупбай</div>
-                <div class="role">Frontend бағыты, 2-курс</div>
-            </div>
-        </div>
-
-        <div class="cta-section">
-            <h2>Қазір Бастаңыз — Оқуды Ақылды Жасаңыз</h2>
-            <p>Жүйеге тегін тіркеліп, барлық курстарыңыз бен прогресіңізді бір жерден тиімді басқарыңыз.</p>
-            <div class="cta-form">
-                <input type="email" id="ctaEmail" class="cta-input" placeholder="email@student.kz">
-                <button class="btn-main" onclick="openModal('Жүйеге тіркелу', 'EduTrack платформасына жаңа студент ретінде тіркелу.')" style="margin: 0;">Тіркелу →</button>
+            <div class="course-card">
+                <div class="tag">Database</div>
+                <h3>Дерекқорларға кіріспе</h3>
+                <p>SQL, PostgreSQL қауіпсіз сақтау және сұраныстарды оңтайландыру.</p>
             </div>
         </div>
     </div>
@@ -249,15 +186,11 @@
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2 id="modalTitle">Жүйеге кіру</h2>
             <p id="modalDesc">Мәліметтерді енгізіңіз.</p>
-            <input type="text" placeholder="Студент ID немесе Email">
+            <input type="text" id="usernameInput" placeholder="Студент аты-жөні немесе Email">
             <input type="password" placeholder="Құпия сөз">
-            <button class="btn-submit" onclick="submitForm()">Растау</button>
+            <button class="btn-submit" onclick="submitForm()">Жүйеге кіру (Растау)</button>
         </div>
     </div>
-
-    <footer>
-        <p>© 2026 EduTrack Студент Курс Жүйесі. Барлық құқықтар қорғалған.</p>
-    </footer>
 
     <script>
         function openModal(title, desc) {
@@ -270,11 +203,22 @@
             document.getElementById('modal').classList.remove('active');
         }
 
+        // БАТЫРМАНЫ БАСҚАНДА НӘТИЖЕЛЕРДІ ШЫҒАРАТЫН ЛОГИКА
         function submitForm() {
-            alert('Сәтті! Мәліметтер қабылданды (Дерекқормен байланыс орнатылуда...)');
+            var name = document.getElementById('usernameInput').value;
+            if(!name) { name = "Қанатұлы Әлібек"; } // Егер бос болса, автоматты есім қойылады
+            
             closeModal();
+            
+            // Ескі баннерді жауып, жеке кабинетті (нәтижелерді) көрсетеміз
+            document.getElementById('hero-banner').style.display = 'none';
+            document.getElementById('dashboard-section').style.display = 'block';
+            document.getElementById('userWelcome').innerText = "Қош келдіңіз, " + name + "!";
+            document.getElementById('loginNavBtn').innerText = "Шығу";
+            
+            // Экранды автоматты түрде нәтижелер бетіне жылжытады
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
-
 </body>
 </html>
