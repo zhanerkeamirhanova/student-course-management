@@ -69,21 +69,25 @@
         .course-card .tag { font-size: 12px; font-weight: bold; color: var(--green-accent); margin-bottom: 10px; }
         .course-card h3 { margin: 0 0 12px 0; color: var(--dark-blue); }
 
-        .table-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 60px; }
+        .table-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 40px; overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th, td { padding: 15px; border-bottom: 1px solid #e2e8f0; }
         th { background-color: #f1f5f9; color: var(--dark-blue); }
 
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
         .badge.active { background-color: #dcfce7; color: #15803d; }
+        .badge.offline { background-color: #ffeeeb; color: #ea580c; }
 
-        /* ЖЕКЕ КАБИНЕТ (РЕЗУЛЬТАТТАР) СЕКЦИЯСЫ - БАСТАПҚЫДА ЖАСЫРЫН */
+        /* ЖЕКЕ КАБИНЕТ СЕКЦИЯСЫ */
         #dashboard-section { display: none; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px rgba(0,0,0,0.05); margin-bottom: 50px; border-left: 6px solid var(--green-accent); }
         .welcome-msg { font-size: 24px; color: var(--dark-blue); margin-bottom: 20px; font-weight: bold; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: #f8fafc; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; }
         .stat-card h4 { margin: 0; color: var(--text-light); font-size: 14px; }
         .stat-card p { margin: 10px 0 0 0; font-size: 28px; font-weight: bold; color: var(--dark-blue); }
+
+        /* ІЗДЕУ КҮЙІ */
+        .search-box { padding: 10px; width: 100%; max-width: 300px; margin-bottom: 15px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
 
         /* МОДАЛЬДЫҚ ТЕРЕЗЕ */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 1000; }
@@ -98,85 +102,89 @@
 
     <nav>
         <div class="logo">EduTrack<span>.</span></div>
-        <ul id="nav-links">
+        <ul>
+            <li><a href="#">Басты бет</a></li>
             <li><a href="#">Курстар</a></li>
-            <li><a href="#">Кесте</a></li>
         </ul>
-        <button class="btn-login" id="loginNavBtn" onclick="openModal('Жүйеге кіру', 'Студенттік тіркелгіңізге кіріңіз.')">Кіру</button>
+        <button class="btn-login" id="loginNavBtn" onclick="openModal('Жүйеге кіру', 'Тексеру үшін мына есімдердің бірін жазсаңыз болады: Асхат, Аружан, Диас')">Кіру</button>
     </nav>
 
     <div class="hero" id="hero-banner">
         <h1>Оқу процесін толық автоматтандыру</h1>
-        <p>Барлық курстар бір жерде, ыңғайлы интерфейс пен нақты уақыттағы академиялық прогресті бақылау жүйесі.</p>
-        <button class="btn-main" onclick="openModal('Жүйеге тіркелу', 'EduTrack платформасына жаңа студент ретінде тіркелу.')">Тіркелу →</button>
+        <p>Платформаға кіріп, өз атыңыз бойынша жеке нәтижелеріңіз бен топтағы студенттер тізімін көріңіз.</p>
+        <button class="btn-main" onclick="openModal('Жүйеге кіру', 'Атыңызды жазып, жүйені іске қосыңыз.')">Платформаны ашу →</button>
     </div>
 
     <div class="container">
         
         <div id="dashboard-section">
-            <div class="welcome-msg" id="userWelcome">Қош келдіңіз, Студент!</div>
-            <p style="color: var(--text-light); margin-bottom: 25px;">Сіздің ағымдағы академиялық үлгеріміңіз бен нәтижелеріңіз:</p>
+            <div class="welcome-msg" id="userWelcome">Қош келдіңіз!</div>
+            <p style="color: var(--text-light); margin-bottom: 25px;">Сіздің жеке академиялық көрсеткіштеріңіз:</p>
             
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h4>Белсенді курстар</h4>
-                    <p>3 Курс</p>
+                    <h4>Ағымдағы GPA</h4>
+                    <p style="color: var(--green-accent);" id="userGPA">0.00</p>
                 </div>
                 <div class="stat-card">
-                    <h4>Жалпы GPA</h4>
-                    <p style="color: var(--green-accent);">3.87</p>
+                    <h4>Сабаққа қатысуы</h4>
+                    <p id="userAttendance">0%</p>
                 </div>
                 <div class="stat-card">
-                    <h4>Қатысу пайызы</h4>
-                    <p>96%</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Жинаған кредиттер</h4>
-                    <p>12 / 20</p>
+                    <h4>Таңдаған пәндері</h4>
+                    <p id="userCourseCount">0 Пән</p>
                 </div>
             </div>
             
-            <h3 style="color: var(--dark-blue); margin-top: 30px;">Ағымдағы бағалар журналы</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Пән атауы</th>
-                        <th>Аралық бақылау (Р1)</th>
-                        <th>Аралық бақылау (Р2)</th>
-                        <th>Емтихан бағасы</th>
-                        <th>Қорытынды (Total)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Python (FastAPI)</td>
-                        <td>95 / 100</td>
-                        <td>92 / 100</td>
-                        <td>88 / 100</td>
-                        <td><b>91 (А)</b></td>
-                    </tr>
-                    <tr>
-                        <td>SQL Дерекқорлар</td>
-                        <td>88 / 100</td>
-                        <td>90 / 100</td>
-                        <td>95 / 100</td>
-                        <td><b>92 (А)</b></td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3 style="color: var(--dark-blue);">Менің бағаларым</h3>
+            <div class="table-container">
+                <table id="gradesTable">
+                    <thead>
+                        <tr>
+                            <th>Пән атауы</th>
+                            <th>Аралық бақылау (Р1)</th>
+                            <th>Аралық бақылау (Р2)</th>
+                            <th>Емтихан</th>
+                            <th>Қорытынды баға</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gradesBody">
+                        </tbody>
+                </table>
+            </div>
+
+            <h3 style="color: var(--dark-blue); margin-top: 40px;">Топтағы студенттер тізімі (Іздеу жүйесімен)</h3>
+            <p style="color: var(--text-light); font-size: 14px;">Топтас студенттерді аты бойынша жылдам іздеу:</p>
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterStudents()" placeholder="Студент атын жазыңыз...">
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Студент</th>
+                            <th>Аты-жөні</th>
+                            <th>Мамандығы</th>
+                            <th>Оқу түрі</th>
+                            <th>Жүйедегі күйі</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentListBody">
+                        </tbody>
+                </table>
+            </div>
         </div>
 
-        <h2 class="section-title">Қолжетімді Курстар</h2>
+        <h2 class="section-title">Платформадағы негізгі бағыттар</h2>
         <div class="course-grid">
             <div class="course-card">
-                <div class="tag">Backend</div>
-                <h3>Python программалау</h3>
-                <p>Негіздерден бастап FastAPI фреймворкіне дейінгі заманауи веб-жобалар.</p>
+                <div class="tag">Backend Development</div>
+                <h3>Python & FastAPI</h3>
+                <p>Веб-серверлер құру, дерекқормен жұмыс және API архитектурасы.</p>
             </div>
             <div class="course-card">
-                <div class="tag">Database</div>
-                <h3>Дерекқорларға кіріспе</h3>
-                <p>SQL, PostgreSQL қауіпсіз сақтау және сұраныстарды оңтайландыру.</p>
+                <div class="tag">Database Administration</div>
+                <h3>SQL & PostgreSQL</h3>
+                <p>Деректерді моделдеу, реляциялық кестелер және сұраныстарды оңтайландыру.</p>
             </div>
         </div>
     </div>
@@ -185,14 +193,62 @@
         <div class="modal-box">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2 id="modalTitle">Жүйеге кіру</h2>
-            <p id="modalDesc">Мәліметтерді енгізіңіз.</p>
-            <input type="text" id="usernameInput" placeholder="Студент аты-жөні немесе Email">
-            <input type="password" placeholder="Құпия сөз">
-            <button class="btn-submit" onclick="submitForm()">Жүйеге кіру (Растау)</button>
+            <p id="modalDesc">Мәлімет енгізіңіз.</p>
+            <input type="text" id="usernameInput" placeholder="Атыңызды жазыңыз (мысалы: Аружан немесе Асхат)">
+            <button class="btn-submit" onclick="loginAction()">Жүйеге кіру</button>
         </div>
     </div>
 
+    <footer>
+        <p>© 2026 EduTrack Автоматтандырылған Студенттік Жүйесі.</p>
+    </footer>
+
     <script>
+        // 💾 СТУДЕНТТЕРДІҢ ӘР ТҮРЛІ МӘЛІМЕТТЕР ҚОРЫ (ДЕРЕКҚОР СИЯҚТЫ)
+        const studentsDatabase = {
+            "асхат": {
+                fullName: "Асхат Мұратұлы",
+                gpa: "3.92",
+                attendance: "98%",
+                courses: 3,
+                grades: [
+                    { name: "Python (FastAPI)", r1: 98, r2: 95, exam: 94, total: "96 (A)" },
+                    { name: "SQL Дерекқорлар", r1: 92, r2: 94, exam: 90, total: "92 (A)" },
+                    { name: "Git & GitHub", r1: 100, r2: 98, exam: 95, total: "97 (A)" }
+                ]
+            },
+            "аружан": {
+                fullName: "Аружан Серікқызы",
+                gpa: "3.55",
+                attendance: "92%",
+                courses: 2,
+                grades: [
+                    { name: "Python (FastAPI)", r1: 85, r2: 88, exam: 82, total: "84 (B+)" },
+                    { name: "SQL Дерекқорлар", r1: 90, r2: 85, exam: 88, total: "87 (A-)" }
+                ]
+            },
+            "диас": {
+                fullName: "Диас Ахметов",
+                gpa: "2.84",
+                attendance: "81%",
+                courses: 2,
+                grades: [
+                    { name: "Python (FastAPI)", r1: 70, r2: 68, exam: 75, total: "72 (C+)" },
+                    { name: "SQL Дерекқорлар", r1: 65, r2: 72, exam: 68, total: "68 (C)" }
+                ]
+            }
+        };
+
+        // 👥 СТУДЕНТТЕРДІҢ ЖАЛПЫ ТІЗІМІ (СПИСОК)
+        const generalStudentList = [
+            { id: "ST-1024", name: "Асхат Мұратұлы", major: "Information Technology", type: "Грант", status: "ONLINE" },
+            { id: "ST-1025", name: "Аружан Серікқызы", major: "Data Science", type: "Грант", status: "ONLINE" },
+            { id: "ST-1026", name: "Диас Ахметов", major: "Computer Engineering", type: "Ақылы", status: "OFFLINE" },
+            { id: "ST-1027", name: "Ерасыл Болатұлы", major: "Information Technology", type: "Грант", status: "OFFLINE" },
+            { id: "ST-1028", name: "Мадина Омарова", major: "Cybersecurity", type: "Ақылы", status: "ONLINE" },
+            { id: "ST-1029", name: "Нұрсұлтан Әлібек", major: "Software Engineering", type: "Грант", status: "ONLINE" }
+        ];
+
         function openModal(title, desc) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalDesc').innerText = desc;
@@ -203,21 +259,85 @@
             document.getElementById('modal').classList.remove('active');
         }
 
-        // БАТЫРМАНЫ БАСҚАНДА НӘТИЖЕЛЕРДІ ШЫҒАРАТЫН ЛОГИКА
-        function submitForm() {
-            var name = document.getElementById('usernameInput').value;
-            if(!name) { name = "Қанатұлы Әлібек"; } // Егер бос болса, автоматты есім қойылады
+        // 🚀 КІРУ БАТЫРМАСЫН БАСҚАНДАҒЫ ДИНАМИКАЛЫҚ ПРОЦЕСС
+        function loginAction() {
+            let inputName = document.getElementById('usernameInput').value.trim();
+            if (!inputName) { inputName = "Асхат"; } // Егер бос жіберсе автоматты Асхат болады
             
+            let key = inputName.toLowerCase();
+            let userData;
+
+            // Егер базада бар студент болса соны алады, жоқ болса жаңа кездейсоқ студент жасайды
+            if (studentsDatabase[key]) {
+                userData = studentsDatabase[key];
+            } else {
+                userData = {
+                    fullName: inputName + " (Жаңа студент)",
+                    gpa: "3.20",
+                    attendance: "90%",
+                    courses: 2,
+                    grades: [
+                        { name: "Python (FastAPI)", r1: 80, r2: 85, exam: 80, total: "81 (B)" },
+                        { name: "SQL Дерекқорлар", r1: 85, r2: 80, exam: 82, total: "82 (B)" }
+                    ]
+                };
+            }
+
             closeModal();
-            
-            // Ескі баннерді жауып, жеке кабинетті (нәтижелерді) көрсетеміз
+
+            // Интерфейсті өзгерту
             document.getElementById('hero-banner').style.display = 'none';
             document.getElementById('dashboard-section').style.display = 'block';
-            document.getElementById('userWelcome').innerText = "Қош келдіңіз, " + name + "!";
-            document.getElementById('loginNavBtn').innerText = "Шығу";
             
-            // Экранды автоматты түрде нәтижелер бетіне жылжытады
+            // Жеке мәліметтерді қою
+            document.getElementById('userWelcome').innerText = "Қош келдіңіз, " + userData.fullName + "!";
+            document.getElementById('userGPA').innerText = userData.gpa;
+            document.getElementById('userAttendance').innerText = userData.attendance;
+            document.getElementById('userCourseCount').innerText = userData.courses + " Пән";
+            document.getElementById('loginNavBtn').innerText = "Шығу";
+
+            // Бағалар кестесін толтыру
+            let gradesBody = document.getElementById('gradesBody');
+            gradesBody.innerHTML = "";
+            userData.grades.forEach(item => {
+                let row = `<tr>
+                    <td>${item.name}</td>
+                    <td>${item.r1}</td>
+                    <td>${item.r2}</td>
+                    <td>${item.exam}</td>
+                    <td><b>${item.total}</b></td>
+                </tr>`;
+                gradesBody.innerHTML += row;
+            });
+
+            // Студенттер тізімін (список) толтыру
+            renderStudentList(generalStudentList);
+
             window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Тізімді экранға шығару функциясы
+        function renderStudentList(list) {
+            let listBody = document.getElementById('studentListBody');
+            listBody.innerHTML = "";
+            list.forEach(st => {
+                let statusBadge = st.status === "ONLINE" ? '<span class="badge active">ONLINE</span>' : '<span class="badge offline">OFFLINE</span>';
+                let row = `<tr>
+                    <td>${st.id}</td>
+                    <td><b>${st.name}</b></td>
+                    <td>${st.major}</td>
+                    <td>${st.type}</td>
+                    <td>${statusBadge}</td>
+                </tr>`;
+                listBody.innerHTML += row;
+            });
+        }
+
+        // 🔍 ТІЗІМ ІШІНЕН АТЫ БОЙЫНША ІЗДЕУ (ФИЛЬТР)
+        function filterStudents() {
+            let text = document.getElementById('searchInput').value.toLowerCase();
+            let filtered = generalStudentList.filter(st => st.name.toLowerCase().includes(text));
+            renderStudentList(filtered);
         }
     </script>
 </body>
