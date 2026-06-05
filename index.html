@@ -8,7 +8,6 @@
 <style>
 :root {
   --bg: #f0f4ff;
-  --bg2: #e8edf8;
   --navy: #0f1e3d;
   --navy2: #1a2f5a;
   --accent: #2563eb;
@@ -26,77 +25,234 @@
   --card: #ffffff;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); }
 
 /* ─── PAGES ─── */
-.page { display:none; }
+.page { display:none; min-height:100vh; }
 .page.active { display:block; }
 
-/* ════════ LOGIN PAGE ════════ */
-#page-login {
+/* ══════════════════════════════
+   LANDING (БАС БЕТ)
+══════════════════════════════ */
+#page-landing {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #1e3a8a 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.land-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 48px;
+}
+.land-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  color: #fff;
+}
+.land-logo span { color: #60a5fa; }
+.land-nav-btns { display: flex; gap: 12px; }
+.land-btn-outline {
+  padding: 9px 24px;
+  border: 1.5px solid rgba(255,255,255,.35);
+  border-radius: 10px;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+}
+.land-btn-outline:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.6); }
+.land-btn-filled {
+  padding: 9px 24px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background .2s;
+}
+.land-btn-filled:hover { background: var(--accent2); }
+
+.land-hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  flex-direction: column;
+}
+.land-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 58px;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+.land-hero h1 span { color: #60a5fa; }
+.land-hero p {
+  font-size: 18px;
+  color: #94a3b8;
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+.land-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.land-cta-main {
+  padding: 14px 36px;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+  box-shadow: 0 8px 24px rgba(37,99,235,.4);
+}
+.land-cta-main:hover { background: var(--accent2); transform: translateY(-2px); }
+.land-cta-sec {
+  padding: 14px 36px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,.3);
+  border-radius: 12px;
+  color: #e2e8f0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+}
+.land-cta-sec:hover { background: rgba(255,255,255,.08); }
+
+.land-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 60px auto 0;
+  padding: 0 24px;
+  width: 100%;
+}
+.land-feat {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: left;
+}
+.land-feat .icon { font-size: 32px; margin-bottom: 12px; }
+.land-feat h4 { color: #fff; font-size: 15px; margin-bottom: 6px; }
+.land-feat p { color: #64748b; font-size: 13px; line-height: 1.5; }
+
+.land-footer {
+  text-align: center;
+  padding: 28px;
+  color: #475569;
+  font-size: 13px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  margin-top: 60px;
+}
+
+/* ══════════════════════════════
+   LOGIN / REGISTER PAGE
+══════════════════════════════ */
+#page-auth {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 50%, #1e3a8a 100%);
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #1e3a8a 100%);
+  padding: 20px;
 }
-#page-login::before {
-  content:'';
-  position:absolute; inset:0;
-  background: radial-gradient(circle at 20% 50%, rgba(37,99,235,.25) 0%, transparent 60%),
-              radial-gradient(circle at 80% 20%, rgba(29,78,216,.2) 0%, transparent 50%);
-}
-.login-card {
+.auth-card {
   background: var(--white);
   border-radius: 24px;
-  padding: 48px 44px;
+  padding: 44px 40px;
   width: 100%;
-  max-width: 460px;
-  position: relative;
-  z-index: 1;
+  max-width: 440px;
   box-shadow: 0 40px 80px rgba(0,0,0,.35);
-  animation: fadeUp .5s ease;
+  animation: fadeUp .4s ease;
 }
-.login-logo {
-  text-align: center;
-  margin-bottom: 32px;
+.auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: color .2s;
 }
-.login-logo h1 {
+.auth-back:hover { color: var(--text); }
+.auth-logo {
   font-family: 'DM Serif Display', serif;
-  font-size: 38px;
+  font-size: 32px;
   color: var(--navy);
+  text-align: center;
+  margin-bottom: 6px;
 }
-.login-logo h1 span { color: var(--accent); }
-.login-logo p { color: var(--muted); font-size: 13px; margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
-.role-tabs {
+.auth-logo span { color: var(--accent); }
+.auth-subtitle { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+.auth-mode-tabs {
   display: flex;
   background: var(--bg);
   border-radius: 12px;
   padding: 4px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   gap: 4px;
 }
-.role-tab {
+.auth-tab {
   flex: 1;
   padding: 10px 8px;
   border: none;
   border-radius: 9px;
   background: transparent;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all .25s;
   font-family: 'DM Sans', sans-serif;
 }
-.role-tab.active { background: var(--navy); color: #fff; }
-.form-field { margin-bottom: 16px; }
+.auth-tab.active { background: var(--navy); color: #fff; }
+.role-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.role-tab {
+  flex: 1;
+  padding: 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+}
+.role-tab.active { border-color: var(--accent); color: var(--accent); background: #eff6ff; }
+.form-field { margin-bottom: 15px; }
 .form-field label {
   display: block;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -104,7 +260,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
 }
 .form-field input, .form-field select {
   width: 100%;
-  padding: 12px 16px;
+  padding: 12px 14px;
   border: 1.5px solid var(--border);
   border-radius: 10px;
   font-size: 14px;
@@ -115,7 +271,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   transition: border-color .2s;
 }
 .form-field input:focus, .form-field select:focus { border-color: var(--accent); }
-.login-submit {
+.auth-submit {
   width: 100%;
   padding: 13px;
   background: var(--accent);
@@ -126,11 +282,11 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   font-weight: 700;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
-  margin-top: 4px;
   transition: background .2s, transform .15s;
+  margin-top: 4px;
 }
-.login-submit:hover { background: var(--accent2); transform: translateY(-1px); }
-.login-err {
+.auth-submit:hover { background: var(--accent2); transform: translateY(-1px); }
+.auth-err {
   background: var(--red-bg);
   color: var(--red);
   border-radius: 8px;
@@ -140,18 +296,20 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   margin-top: 12px;
   display: none;
 }
-.login-hints {
-  margin-top: 24px;
-  padding-top: 20px;
+.auth-hint {
+  margin-top: 20px;
+  padding-top: 16px;
   border-top: 1px solid var(--border);
   font-size: 12px;
   color: var(--muted);
   text-align: center;
   line-height: 2;
 }
-.login-hints b { color: var(--text); }
+.auth-hint b { color: var(--text); }
 
-/* ════════ TOPBAR ════════ */
+/* ══════════════════════════════
+   TOPBAR
+══════════════════════════════ */
 #topbar { display: none; }
 .topbar {
   background: var(--navy);
@@ -165,13 +323,9 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   z-index: 900;
   box-shadow: 0 2px 12px rgba(0,0,0,.2);
 }
-.tb-logo {
-  font-family: 'DM Serif Display', serif;
-  font-size: 22px;
-  color: #fff;
-}
-.tb-logo span { color: #60a5fa; }
-.tb-nav { display: flex; gap: 4px; }
+.tb-logo { font-family:'DM Serif Display',serif; font-size:22px; color:#fff; }
+.tb-logo span { color:#60a5fa; }
+.tb-nav { display:flex; gap:4px; }
 .tb-btn {
   padding: 7px 16px;
   border: 1px solid transparent;
@@ -184,8 +338,8 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   font-family: 'DM Sans', sans-serif;
   transition: all .2s;
 }
-.tb-btn:hover, .tb-btn.active { background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.15); }
-.tb-right { display: flex; align-items: center; gap: 10px; }
+.tb-btn:hover, .tb-btn.active { background: rgba(255,255,255,.1); color:#fff; border-color:rgba(255,255,255,.15); }
+.tb-right { display:flex; align-items:center; gap:10px; }
 .tb-user {
   background: rgba(255,255,255,.1);
   border: 1px solid rgba(255,255,255,.15);
@@ -206,384 +360,323 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   font-family: 'DM Sans', sans-serif;
   transition: all .2s;
 }
-.tb-logout:hover { border-color: #f87171; color: #f87171; }
+.tb-logout:hover { border-color:#f87171; color:#f87171; }
 
-/* ════════ STUDENT PANEL ════════ */
-#page-student { padding-bottom: 60px; }
+/* ══════════════════════════════
+   STUDENT PANEL
+══════════════════════════════ */
+#page-student { padding-bottom: 60px; background: var(--bg); }
 .student-hero {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
-  padding: 44px 32px;
-  color: #fff;
+  padding: 40px 32px;
 }
-.student-hero-inner { max-width: 1100px; margin: 0 auto; }
-.student-hero h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 34px;
-  margin-bottom: 6px;
-}
-.student-hero p { color: #94a3b8; font-size: 14px; }
-.stats-strip {
-  display: flex;
-  gap: 16px;
-  margin-top: 28px;
-  flex-wrap: wrap;
-}
+.student-hero-inner { max-width: 1100px; margin:0 auto; }
+.student-hero h2 { font-family:'DM Serif Display',serif; font-size:32px; color:#fff; margin-bottom:4px; }
+.student-hero p { color:#94a3b8; font-size:14px; margin-bottom:24px; }
+.stats-strip { display:flex; gap:16px; flex-wrap:wrap; }
 .stat-pill {
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.12);
   border-radius: 14px;
   padding: 16px 24px;
-  min-width: 150px;
+  min-width: 140px;
 }
-.stat-pill .sp-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
-.stat-pill .sp-val { font-family: 'DM Serif Display', serif; font-size: 28px; color: #fff; }
-.sp-val.green { color: #4ade80; }
-.sp-val.blue { color: #60a5fa; }
+.sp-label { font-size:11px; color:#94a3b8; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px; }
+.sp-val { font-family:'DM Serif Display',serif; font-size:28px; color:#fff; }
+.sp-val.green { color:#4ade80; }
+.sp-val.blue { color:#60a5fa; }
 
-.s-body { max-width: 1100px; margin: 32px auto; padding: 0 24px; }
-.s-section-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 22px;
-  color: var(--navy);
-  margin-bottom: 6px;
-}
-.s-section-sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+.s-body { max-width:1100px; margin:32px auto; padding:0 24px; }
+.s-section-title { font-family:'DM Serif Display',serif; font-size:22px; color:var(--navy); margin-bottom:4px; }
+.s-section-sub { color:var(--muted); font-size:13px; margin-bottom:18px; }
 
-/* Course cards */
-.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 40px; }
+.course-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-bottom:40px; }
 .course-card {
   background: var(--card);
   border: 1.5px solid var(--border);
   border-radius: 16px;
-  padding: 24px 22px;
+  padding: 24px 20px;
   transition: all .25s;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 .course-card::after {
-  content:'';
-  position:absolute; top:0; left:0; right:0; height:3px;
-  background: var(--accent);
-  transform: scaleX(0); transform-origin:left;
-  transition: transform .3s;
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .3s;
 }
-.course-card:hover::after { transform: scaleX(1); }
-.course-card:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(37,99,235,.12); transform: translateY(-3px); }
-.course-card.enrolled { border-color: var(--green); background: #f0fdf4; }
-.course-card.enrolled::after { background: var(--green); transform: scaleX(1); }
-.cc-tag { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
-.cc-tag.green { color: var(--green); }
-.cc-tag.gold { color: var(--gold); }
-.course-card h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
-.course-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+.course-card:hover::after { transform:scaleX(1); }
+.course-card:hover { border-color:var(--accent); box-shadow:0 8px 24px rgba(37,99,235,.1); transform:translateY(-3px); }
+.course-card.enrolled { border-color:var(--green); background:#f0fdf4; }
+.course-card.enrolled::after { background:var(--green); transform:scaleX(1); }
+.cc-tag { font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px; }
+.cc-tag.db { color:var(--green); }
+.cc-tag.fe { color:var(--gold); }
+.cc-tag.sec { color:var(--red); }
+.course-card h4 { font-size:15px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+.course-card p { font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:12px; }
+.cc-btns { display:flex; gap:8px; }
 .enroll-btn {
-  padding: 7px 16px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: background .15s;
+  padding:7px 16px; background:var(--accent); color:#fff;
+  border:none; border-radius:8px; font-size:12px; font-weight:700;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:background .15s;
 }
-.enroll-btn:hover { background: var(--accent2); }
-.enroll-btn.enrolled { background: var(--green); cursor: default; }
+.enroll-btn:hover { background:var(--accent2); }
+.enroll-btn.done { background:var(--green); cursor:default; }
 .drop-btn {
-  padding: 7px 14px;
-  background: transparent;
-  color: var(--red);
-  border: 1px solid var(--red);
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  margin-left: 6px;
-  transition: all .15s;
+  padding:7px 14px; background:transparent; color:var(--red);
+  border:1px solid var(--red); border-radius:8px; font-size:12px;
+  font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .15s;
 }
-.drop-btn:hover { background: var(--red); color: #fff; }
+.drop-btn:hover { background:var(--red); color:#fff; }
 
-/* Grades table */
 .data-table-wrap {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 32px;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:16px; overflow:hidden; margin-bottom:32px;
 }
-.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table { width:100%; border-collapse:collapse; font-size:13px; }
 .data-table th {
-  text-align: left;
-  padding: 12px 16px;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--muted);
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+  text-align:left; padding:11px 16px;
+  font-size:11px; text-transform:uppercase; letter-spacing:1.5px;
+  color:var(--muted); background:var(--bg); border-bottom:1px solid var(--border);
 }
-.data-table td { padding: 13px 16px; border-bottom: 1px solid var(--border); }
-.data-table tr:last-child td { border-bottom: none; }
-.data-table tr:hover td { background: #f8faff; }
+.data-table td { padding:12px 16px; border-bottom:1px solid var(--border); }
+.data-table tr:last-child td { border-bottom:none; }
+.data-table tr:hover td { background:#f8faff; }
 
-/* Schedule */
-.schedule-table { margin-bottom: 40px; }
-.badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
+.badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+.badge-green { background:var(--green-bg); color:var(--green); }
+.badge-gold { background:var(--gold-bg); color:var(--gold); }
+.badge-red { background:var(--red-bg); color:var(--red); }
+.badge-blue { background:#dbeafe; color:var(--accent); }
+
+/* Grade edit inline */
+.grade-input {
+  width:54px; padding:4px 8px;
+  border:1.5px solid var(--border); border-radius:6px;
+  font-size:13px; font-family:'DM Sans',sans-serif;
+  color:var(--text); text-align:center; outline:none;
+  transition:border-color .2s;
 }
-.badge-green { background: var(--green-bg); color: var(--green); }
-.badge-gold { background: var(--gold-bg); color: var(--gold); }
-.badge-red { background: var(--red-bg); color: var(--red); }
-.badge-blue { background: #dbeafe; color: var(--accent); }
+.grade-input:focus { border-color:var(--accent); }
+.save-grade-btn {
+  padding:5px 12px; background:var(--green); color:#fff;
+  border:none; border-radius:7px; font-size:11px; font-weight:700;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:background .15s;
+}
+.save-grade-btn:hover { background:#15803d; }
 
-/* ════════ ADMIN PANEL ════════ */
-#page-admin { min-height: calc(100vh - 62px); display: flex; }
+/* ══════════════════════════════
+   ADMIN PANEL
+══════════════════════════════ */
+#page-admin { display:flex; min-height:calc(100vh - 62px); background:var(--bg); }
 .admin-sidebar {
-  width: 230px;
-  background: var(--navy);
-  min-height: calc(100vh - 62px);
-  padding: 24px 12px;
-  flex-shrink: 0;
-  position: sticky;
-  top: 62px;
-  height: calc(100vh - 62px);
-  overflow-y: auto;
+  width:230px; background:var(--navy); min-height:calc(100vh - 62px);
+  padding:24px 12px; flex-shrink:0; position:sticky; top:62px;
+  height:calc(100vh - 62px); overflow-y:auto;
 }
-.sb-section { margin-bottom: 24px; }
-.sb-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #475569;
-  padding: 0 10px;
-  margin-bottom: 6px;
-}
+.sb-section { margin-bottom:24px; }
+.sb-label { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#475569; padding:0 10px; margin-bottom:6px; }
 .sb-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px 12px;
-  background: transparent;
-  border: none;
-  border-radius: 10px;
-  color: #94a3b8;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  font-family: 'DM Sans', sans-serif;
-  transition: all .2s;
-  margin-bottom: 2px;
+  display:flex; align-items:center; gap:10px; width:100%;
+  padding:10px 12px; background:transparent; border:none; border-radius:10px;
+  color:#94a3b8; font-size:13px; font-weight:600; cursor:pointer;
+  text-align:left; font-family:'DM Sans',sans-serif; transition:all .2s; margin-bottom:2px;
 }
-.sb-btn:hover, .sb-btn.active { background: rgba(255,255,255,.08); color: #e2e8f0; }
-.sb-btn.active { color: #60a5fa; }
+.sb-btn:hover, .sb-btn.active { background:rgba(255,255,255,.08); color:#e2e8f0; }
+.sb-btn.active { color:#60a5fa; }
+.admin-content { flex:1; padding:32px; overflow-y:auto; }
+.admin-tab { display:none; }
+.admin-tab.active { display:block; }
 
-.admin-content { flex: 1; padding: 32px; overflow-y: auto; background: var(--bg); }
-.admin-tab { display: none; }
-.admin-tab.active { display: block; }
-
-/* Admin section header */
-.a-head { margin-bottom: 28px; }
-.a-head h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 28px;
-  color: var(--navy);
-  margin-bottom: 4px;
-}
-.a-head p { color: var(--muted); font-size: 14px; }
-
-/* Stats row */
-.a-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+.a-head { margin-bottom:26px; }
+.a-head h2 { font-family:'DM Serif Display',serif; font-size:28px; color:var(--navy); margin-bottom:4px; }
+.a-head p { color:var(--muted); font-size:14px; }
+.a-stats { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:28px; }
 .a-stat {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px 24px;
-  flex: 1;
-  min-width: 150px;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:16px; padding:20px 24px; flex:1; min-width:140px;
 }
-.a-stat .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; }
-.a-stat .val { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--navy); }
+.a-stat .lbl { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:8px; }
+.a-stat .val { font-family:'DM Serif Display',serif; font-size:36px; color:var(--navy); }
 
-/* Admin toolbar */
-.a-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+.a-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; gap:12px; flex-wrap:wrap; }
 .a-search {
-  padding: 9px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: 9px;
-  font-size: 13px;
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  outline: none;
-  transition: border-color .2s;
-  min-width: 220px;
-  background: var(--white);
+  padding:9px 14px; border:1.5px solid var(--border);
+  border-radius:9px; font-size:13px; font-family:'DM Sans',sans-serif;
+  color:var(--text); outline:none; transition:border-color .2s; min-width:220px; background:var(--white);
 }
-.a-search:focus { border-color: var(--accent); }
+.a-search:focus { border-color:var(--accent); }
 .a-add-btn {
-  padding: 9px 20px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 9px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: background .15s;
-  white-space: nowrap;
+  padding:9px 20px; background:var(--accent); color:#fff;
+  border:none; border-radius:9px; font-size:13px; font-weight:700;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:background .15s; white-space:nowrap;
 }
-.a-add-btn:hover { background: var(--accent2); }
-
-/* Action btns in table */
+.a-add-btn:hover { background:var(--accent2); }
 .tbl-act {
-  padding: 4px 10px;
-  font-size: 11px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: all .15s;
-  margin-right: 4px;
+  padding:4px 10px; font-size:11px; border:1px solid var(--border);
+  border-radius:6px; background:transparent; color:var(--muted);
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .15s; margin-right:4px;
 }
-.tbl-act:hover { border-color: var(--accent); color: var(--accent); }
-.tbl-act.danger:hover { border-color: var(--red); color: var(--red); }
+.tbl-act:hover { border-color:var(--accent); color:var(--accent); }
+.tbl-act.danger:hover { border-color:var(--red); color:var(--red); }
 
-/* ════════ MODAL ════════ */
+/* ══════ MODAL ══════ */
 .modal-bg {
-  position: fixed; inset: 0;
-  background: rgba(15,23,42,.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  animation: fadeIn .2s;
+  position:fixed; inset:0; background:rgba(15,23,42,.6);
+  display:none; align-items:center; justify-content:center;
+  z-index:1000;
 }
-.modal-bg.open { display: flex; }
+.modal-bg.open { display:flex; }
 .modal-box {
-  background: var(--white);
-  border-radius: 20px;
-  padding: 36px 32px;
-  width: 100%;
-  max-width: 440px;
-  position: relative;
-  box-shadow: 0 30px 60px rgba(0,0,0,.25);
-  animation: fadeUp .25s ease;
+  background:var(--white); border-radius:20px; padding:36px 32px;
+  width:100%; max-width:440px; position:relative;
+  box-shadow:0 30px 60px rgba(0,0,0,.25); animation:fadeUp .25s ease;
 }
-.modal-box h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 24px;
-  color: var(--navy);
-  margin-bottom: 6px;
-}
-.modal-box p { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
-.modal-close {
-  position: absolute; top: 16px; right: 20px;
-  background: none; border: none; font-size: 22px;
-  color: var(--muted); cursor: pointer;
-}
+.modal-box h3 { font-family:'DM Serif Display',serif; font-size:24px; color:var(--navy); margin-bottom:6px; }
+.modal-box p { color:var(--muted); font-size:13px; margin-bottom:20px; }
+.modal-close { position:absolute; top:16px; right:20px; background:none; border:none; font-size:22px; color:var(--muted); cursor:pointer; }
 .modal-submit {
-  width: 100%;
-  padding: 13px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  margin-top: 8px;
-  transition: background .15s;
+  width:100%; padding:13px; background:var(--accent); color:#fff;
+  border:none; border-radius:10px; font-size:14px; font-weight:700;
+  cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:8px; transition:background .15s;
 }
-.modal-submit:hover { background: var(--accent2); }
+.modal-submit:hover { background:var(--accent2); }
 
-/* Toast notification */
+/* ══════ TOAST ══════ */
 .toast {
-  position: fixed;
-  bottom: 28px; right: 28px;
-  background: var(--navy);
-  color: #fff;
-  padding: 14px 20px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow: 0 8px 24px rgba(0,0,0,.3);
-  display: none;
-  z-index: 2000;
-  animation: fadeUp .3s ease;
-  border-left: 4px solid var(--accent);
+  position:fixed; bottom:28px; right:28px;
+  background:var(--navy); color:#fff; padding:14px 20px;
+  border-radius:12px; font-size:14px; font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,.3); display:none; z-index:2000;
+  border-left:4px solid var(--accent);
 }
-.toast.show { display: block; }
-.toast.success { border-left-color: var(--green); }
-.toast.danger { border-left-color: var(--red); }
+.toast.show { display:block; animation:fadeUp .3s ease; }
+.toast.success { border-left-color:var(--green); }
+.toast.danger { border-left-color:var(--red); }
 
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-
-/* Responsive */
-@media(max-width:700px) {
-  .admin-sidebar { display:none; }
-  .tb-nav { display:none; }
-}
 </style>
 </head>
 <body>
 
-<!-- ══════ LOGIN ══════ -->
-<div id="page-login" class="page active">
-  <div class="login-card">
-    <div class="login-logo">
-      <h1>EduTrack<span>.</span></h1>
-      <p>Студент Курс Жүйесі</p>
+<!-- ══════════════════════════════
+     БАС БЕТ (LANDING)
+══════════════════════════════ -->
+<div id="page-landing" class="page active">
+  <nav class="land-nav">
+    <div class="land-logo">EduTrack<span>.</span></div>
+    <div class="land-nav-btns">
+      <button class="land-btn-outline" onclick="goAuth('login')">Кіру</button>
+      <button class="land-btn-filled" onclick="goAuth('register')">Тіркелу →</button>
     </div>
-    <div class="role-tabs">
-      <button class="role-tab active" onclick="setRole('student',this)">👤 Студент</button>
-      <button class="role-tab" onclick="setRole('admin',this)">🔐 Әкімші</button>
+  </nav>
+
+  <div class="land-hero">
+    <h1>Оқу процесін <span>толық</span> автоматтандыру</h1>
+    <p>Курстарға тіркеліңіз, үлгеріміңізді бақылаңыз және академиялық жетістіктеріңізді арттырыңыз.</p>
+    <div class="land-cta-row">
+      <button class="land-cta-main" onclick="goAuth('register')">🎓 Студент ретінде тіркелу</button>
+      <button class="land-cta-sec" onclick="goAuth('login')">Жүйеге кіру</button>
     </div>
+
+    <div class="land-features">
+      <div class="land-feat">
+        <div class="icon">📚</div>
+        <h4>Курс таңдау</h4>
+        <p>Python, SQL, Frontend және Cybersecurity бағыттарынан таңдаңыз</p>
+      </div>
+      <div class="land-feat">
+        <div class="icon">📊</div>
+        <h4>Үлгерімді бақылау</h4>
+        <p>GPA, бағалар мен қатысу пайызын нақты уақытта бақылаңыз</p>
+      </div>
+      <div class="land-feat">
+        <div class="icon">🔐</div>
+        <h4>Админ панелі</h4>
+        <p>Студенттер, курстар мен мұғалімдерді толық басқарыңыз</p>
+      </div>
+      <div class="land-feat">
+        <div class="icon">🗓</div>
+        <h4>Кесте жоспарлау</h4>
+        <p>Апталық сабақ кестесін бір жерде қараңыз</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="land-footer">© 2026 EduTrack — Студент Курс Жүйесі. Барлық құқықтар қорғалған.</div>
+</div>
+
+<!-- ══════════════════════════════
+     ЛОГИН / ТІРКЕЛУ БЕТІ
+══════════════════════════════ -->
+<div id="page-auth" class="page">
+  <div class="auth-card">
+    <button class="auth-back" onclick="showPage('landing')">← Бас бетке</button>
+    <div class="auth-logo">EduTrack<span>.</span></div>
+    <div class="auth-subtitle">Оқу платформасына қош келдіңіз</div>
+
+    <!-- Кіру / Тіркелу табтары -->
+    <div class="auth-mode-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthMode('login')">🔑 Кіру</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthMode('register')">📝 Тіркелу</button>
+    </div>
+
+    <!-- Рөл таңдау (тек Кіру кезінде) -->
+    <div id="role-select-wrap">
+      <div class="role-tabs">
+        <button class="role-tab active" id="role-student" onclick="selectRole('student')">👤 Студент</button>
+        <button class="role-tab" id="role-admin" onclick="selectRole('admin')">🔐 Әкімші</button>
+      </div>
+    </div>
+
+    <!-- Форма өрістері -->
     <div class="form-field">
-      <label>Логин</label>
-      <input type="text" id="loginUser" placeholder="Логин енгізіңіз" onkeydown="if(event.key==='Enter')doLogin()">
+      <label>Аты-жөні / Логин</label>
+      <input type="text" id="authName" placeholder="Атыңызды жазыңыз..." onkeydown="if(event.key==='Enter')submitAuth()">
+    </div>
+    <div class="form-field" id="surnameField" style="display:none">
+      <label>Тегі (тіркелу үшін)</label>
+      <input type="text" id="authSurname" placeholder="Тегіңіз (міндетті емес)">
     </div>
     <div class="form-field">
       <label>Пароль</label>
-      <input type="password" id="loginPass" placeholder="Пароль" onkeydown="if(event.key==='Enter')doLogin()">
+      <input type="password" id="authPass" placeholder="Пароль" onkeydown="if(event.key==='Enter')submitAuth()">
     </div>
-    <button class="login-submit" onclick="doLogin()">Кіру →</button>
-    <div class="login-err" id="loginErr">❌ Логин немесе пароль қате!</div>
-    <div class="login-hints">
-      <b>Демо аккаунттар:</b><br>
-      Студент: <b>ashat / 1234</b> · <b>arujan / 1234</b> · <b>dias / 1234</b><br>
+    <div class="form-field" id="courseSelectWrap" style="display:none">
+      <label>Бастапқы курс таңдаңыз</label>
+      <select id="authCourse">
+        <option value="c1">Python Backend Developer</option>
+        <option value="c2">SQL Database Administrator</option>
+        <option value="c3">Frontend Web Developer</option>
+        <option value="c4">Cybersecurity Specialist</option>
+        <option value="c5">Fullstack Developer</option>
+      </select>
+    </div>
+
+    <button class="auth-submit" onclick="submitAuth()" id="authSubmitBtn">Кіру →</button>
+    <div class="auth-err" id="authErr">❌ Логин немесе пароль қате!</div>
+
+    <div class="auth-hint" id="loginHint">
+      <b>Кіру үшін:</b> кез келген атыңызды жазып, пароль: <b>1234</b><br>
+      Демо: <b>Асхат / 1234</b> · <b>Аружан / 1234</b> · <b>Диас / 1234</b><br>
       Әкімші: <b>admin / admin123</b>
+    </div>
+    <div class="auth-hint" id="registerHint" style="display:none">
+      Атыңызды жазып, пароль <b>1234</b> қойыңыз.<br>Тіркелгеннен кейін жүйеге автоматты кіресіз.
     </div>
   </div>
 </div>
 
-<!-- ══════ TOPBAR ══════ -->
+<!-- ══════════════════════════════
+     TOPBAR
+══════════════════════════════ -->
 <div id="topbar">
   <div class="topbar">
     <div class="tb-logo">EduTrack<span>.</span></div>
     <div class="tb-nav" id="studentNav" style="display:none">
-      <button class="tb-btn active" onclick="showStudentTab('courses')">📚 Курстар</button>
-      <button class="tb-btn" onclick="showStudentTab('grades')">📊 Үлгерім</button>
-      <button class="tb-btn" onclick="showStudentTab('schedule')">🗓 Кесте</button>
+      <button class="tb-btn active" onclick="showStudentTab('courses',this)">📚 Курстар</button>
+      <button class="tb-btn" onclick="showStudentTab('grades',this)">📊 Үлгерім</button>
+      <button class="tb-btn" onclick="showStudentTab('schedule',this)">🗓 Кесте</button>
     </div>
     <div class="tb-nav" id="adminNav" style="display:none">
       <button class="tb-btn active" onclick="showAdminTab('dashboard')">📊 Дашборд</button>
@@ -598,60 +691,49 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   </div>
 </div>
 
-<!-- ══════ STUDENT PAGE ══════ -->
+<!-- ══════════════════════════════
+     СТУДЕНТ ПАНЕЛІ
+══════════════════════════════ -->
 <div id="page-student" class="page">
   <div class="student-hero">
     <div class="student-hero-inner">
-      <h2 id="stuHelloName">Қош келдіңіз!</h2>
-      <p id="stuHelloSub">Академиялық көрсеткіштеріңіз</p>
+      <h2 id="stuName">Қош келдіңіз!</h2>
+      <p id="stuId">Студент ID</p>
       <div class="stats-strip">
-        <div class="stat-pill">
-          <div class="sp-label">GPA</div>
-          <div class="sp-val green" id="stuGpa">—</div>
-        </div>
-        <div class="stat-pill">
-          <div class="sp-label">Қатысу</div>
-          <div class="sp-val blue" id="stuAtt">—</div>
-        </div>
-        <div class="stat-pill">
-          <div class="sp-label">Тіркелген курс</div>
-          <div class="sp-val" id="stuEnrolledCount" style="font-size:28px">—</div>
-        </div>
+        <div class="stat-pill"><div class="sp-label">GPA</div><div class="sp-val green" id="stuGpa">—</div></div>
+        <div class="stat-pill"><div class="sp-label">Қатысу</div><div class="sp-val blue" id="stuAtt">—</div></div>
+        <div class="stat-pill"><div class="sp-label">Тіркелген курс</div><div class="sp-val" id="stuCount" style="font-size:26px">—</div></div>
       </div>
     </div>
   </div>
 
   <div class="s-body">
-    <!-- COURSES TAB -->
+    <!-- Курстар -->
     <div id="stu-tab-courses" class="admin-tab active">
-      <div class="s-section-title">Қолжетімді Курстар</div>
+      <div class="s-section-title">Барлық Курстар</div>
       <div class="s-section-sub">Курсқа тіркеліп немесе одан шығыңыз</div>
       <div class="course-grid" id="stuCourseGrid"></div>
     </div>
 
-    <!-- GRADES TAB -->
+    <!-- Үлгерім + Баға өзгерту -->
     <div id="stu-tab-grades" class="admin-tab">
       <div class="s-section-title">Оқу Үлгерімі</div>
-      <div class="s-section-sub">Ағымдағы бағаларыңыз мен академиялық көрсеткіштер</div>
+      <div class="s-section-sub">Бағаларды өзгертіп «Сақтау» батырмасын басыңыз — GPA автоматты есептеледі</div>
       <div class="data-table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Пән</th><th>Р1</th><th>Р2</th><th>Емтихан</th><th>Қорытынды</th><th>Күй</th></tr>
-          </thead>
+          <thead><tr><th>Пән</th><th>Р1 (0-100)</th><th>Р2 (0-100)</th><th>Емтихан (0-100)</th><th>Қорытынды</th><th>Күй</th><th>Сақтау</th></tr></thead>
           <tbody id="stuGradesBody"></tbody>
         </table>
       </div>
     </div>
 
-    <!-- SCHEDULE TAB -->
+    <!-- Кесте -->
     <div id="stu-tab-schedule" class="admin-tab">
       <div class="s-section-title">Апталық Кесте</div>
-      <div class="s-section-sub">Ағымдағы сабақтар мен зертханалар</div>
-      <div class="data-table-wrap schedule-table">
-        <table class="data-table" id="stuScheduleTable">
-          <thead>
-            <tr><th>Уақыт</th><th>Курс</th><th>Тақырып</th><th>Мұғалім</th><th>Бөлме</th><th>Күйі</th></tr>
-          </thead>
+      <div class="s-section-sub">Ағымдағы сабақтар</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Уақыт</th><th>Курс</th><th>Тақырып</th><th>Мұғалім</th><th>Бөлме</th><th>Күйі</th></tr></thead>
           <tbody id="stuScheduleBody"></tbody>
         </table>
       </div>
@@ -659,7 +741,9 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   </div>
 </div>
 
-<!-- ══════ ADMIN PAGE ══════ -->
+<!-- ══════════════════════════════
+     АДМИН ПАНЕЛІ
+══════════════════════════════ -->
 <div id="page-admin" class="page">
   <div class="admin-sidebar">
     <div class="sb-section">
@@ -673,47 +757,40 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
       <button class="sb-btn" onclick="showAdminTab('teachers')"><span>👨‍🏫</span> Мұғалімдер</button>
     </div>
   </div>
-
   <div class="admin-content">
-    <!-- DASHBOARD -->
+    <!-- Дашборд -->
     <div id="admin-tab-dashboard" class="admin-tab active">
-      <div class="a-head">
-        <h2>Дашборд</h2>
-        <p>EduTrack жүйесінің жалпы шолуы</p>
-      </div>
+      <div class="a-head"><h2>Дашборд</h2><p>EduTrack жүйесінің жалпы шолуы</p></div>
       <div class="a-stats" id="adminStats"></div>
-      <div class="s-section-title" style="font-size:18px;margin-bottom:14px;">Соңғы тіркелген студенттер</div>
-      <div class="data-table-wrap"><div id="dashStudents"></div></div>
+      <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy);margin-bottom:14px;">Соңғы студенттер</div>
+      <div class="data-table-wrap" id="dashStudents"></div>
     </div>
-
-    <!-- STUDENTS -->
+    <!-- Студенттер -->
     <div id="admin-tab-students" class="admin-tab">
-      <div class="a-head"><h2>Студенттер</h2><p>Студенттерді қосу, өзгерту немесе жою</p></div>
+      <div class="a-head"><h2>Студенттер</h2><p>Қосу, іздеу, жою</p></div>
       <div class="a-toolbar">
         <input class="a-search" type="text" placeholder="🔍 Студент іздеу..." oninput="filterAdminStudents(this.value)">
-        <button class="a-add-btn" onclick="openAddStudentModal()">+ Студент қосу</button>
+        <button class="a-add-btn" onclick="openModal('addStudent')">+ Студент қосу</button>
       </div>
-      <div class="data-table-wrap"><div id="adminStudentsTable"></div></div>
+      <div class="data-table-wrap" id="adminStudentsTable"></div>
     </div>
-
-    <!-- COURSES -->
+    <!-- Курстар -->
     <div id="admin-tab-courses" class="admin-tab">
       <div class="a-head"><h2>Курстар</h2><p>Курстарды қосу немесе жою</p></div>
       <div class="a-toolbar">
         <div></div>
-        <button class="a-add-btn" onclick="openAddCourseModal()">+ Курс қосу</button>
+        <button class="a-add-btn" onclick="openModal('addCourse')">+ Курс қосу</button>
       </div>
-      <div class="data-table-wrap"><div id="adminCoursesTable"></div></div>
+      <div class="data-table-wrap" id="adminCoursesTable"></div>
     </div>
-
-    <!-- TEACHERS -->
+    <!-- Мұғалімдер -->
     <div id="admin-tab-teachers" class="admin-tab">
-      <div class="a-head"><h2>Мұғалімдер</h2><p>Мұғалімдерді қосу немесе жою</p></div>
+      <div class="a-head"><h2>Мұғалімдер</h2><p>Қосу немесе жою</p></div>
       <div class="a-toolbar">
         <div></div>
-        <button class="a-add-btn" onclick="openAddTeacherModal()">+ Мұғалім қосу</button>
+        <button class="a-add-btn" onclick="openModal('addTeacher')">+ Мұғалім қосу</button>
       </div>
-      <div class="data-table-wrap"><div id="adminTeachersTable"></div></div>
+      <div class="data-table-wrap" id="adminTeachersTable"></div>
     </div>
   </div>
 </div>
@@ -722,43 +799,44 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
 <div class="modal-bg" id="modal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <h3 id="modalTitle">Тақырып</h3>
-    <p id="modalDesc">Сипаттама</p>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
     <div id="modalBody"></div>
-    <button class="modal-submit" id="modalSubmit" onclick="modalSubmitFn()">Сақтау</button>
+    <button class="modal-submit" onclick="submitModal()">Сақтау</button>
   </div>
 </div>
 
-<!-- ══════ TOAST ══════ -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ══════════════════════════════
-// DATA
+// МӘЛІМЕТТЕР БАЗАСЫ
 // ══════════════════════════════
 let db = {
   students: [
-    { id:'ST-1024', login:'ashat', pass:'1234', name:'Асхат Мұратұлы', type:'Грант', status:'ONLINE', enrolled:['c1','c2'], gpa:'3.92', att:'98%', grades:[
-      { subj:'Python (FastAPI)', r1:98, r2:95, exam:94, total:'96 (A)' },
-      { subj:'SQL Дерекқорлар', r1:92, r2:94, exam:90, total:'92 (A)' }
-    ]},
-    { id:'ST-1025', login:'arujan', pass:'1234', name:'Аружан Серікқызы', type:'Грант', status:'ONLINE', enrolled:['c3'], gpa:'3.55', att:'92%', grades:[
-      { subj:'HTML/CSS/JS', r1:85, r2:88, exam:82, total:'84 (B+)' }
-    ]},
-    { id:'ST-1026', login:'dias', pass:'1234', name:'Диас Ахметов', type:'Ақылы', status:'OFFLINE', enrolled:['c2'], gpa:'2.84', att:'81%', grades:[
-      { subj:'SQL Дерекқорлар', r1:70, r2:68, exam:75, total:'72 (C+)' }
-    ]},
-    { id:'ST-1027', login:'erasyl', pass:'1234', name:'Ерасыл Болатұлы', type:'Грант', status:'OFFLINE', enrolled:['c1'], gpa:'3.10', att:'85%', grades:[
-      { subj:'Python негіздері', r1:78, r2:82, exam:80, total:'80 (B)' }
-    ]},
-    { id:'ST-1028', login:'madina', pass:'1234', name:'Мадина Омарова', type:'Ақылы', status:'ONLINE', enrolled:['c4'], gpa:'3.70', att:'94%', grades:[
-      { subj:'Cybersecurity', r1:90, r2:92, exam:88, total:'90 (A-)' }
-    ]},
+    { id:'ST-001', name:'Асхат Мұратұлы', login:'асхат', pass:'1234', type:'Грант', status:'ONLINE',
+      enrolled:['c1','c2'], gpa:3.92, att:98,
+      grades:[
+        { cid:'c1', subj:'Python Backend Developer', r1:98, r2:95, exam:94 },
+        { cid:'c2', subj:'SQL Database Administrator', r1:92, r2:94, exam:90 }
+      ]},
+    { id:'ST-002', name:'Аружан Серікқызы', login:'аружан', pass:'1234', type:'Грант', status:'ONLINE',
+      enrolled:['c3'], gpa:3.55, att:92,
+      grades:[{ cid:'c3', subj:'Frontend Web Developer', r1:85, r2:88, exam:82 }]},
+    { id:'ST-003', name:'Диас Ахметов', login:'диас', pass:'1234', type:'Ақылы', status:'OFFLINE',
+      enrolled:['c2'], gpa:2.84, att:81,
+      grades:[{ cid:'c2', subj:'SQL Database Administrator', r1:70, r2:68, exam:75 }]},
+    { id:'ST-004', name:'Ерасыл Болатұлы', login:'ерасыл', pass:'1234', type:'Грант', status:'OFFLINE',
+      enrolled:['c1'], gpa:3.10, att:85,
+      grades:[{ cid:'c1', subj:'Python Backend Developer', r1:78, r2:82, exam:80 }]},
+    { id:'ST-005', name:'Мадина Омарова', login:'мадина', pass:'1234', type:'Ақылы', status:'ONLINE',
+      enrolled:['c4'], gpa:3.70, att:94,
+      grades:[{ cid:'c4', subj:'Cybersecurity Specialist', r1:90, r2:92, exam:88 }]},
   ],
   courses: [
-    { id:'c1', name:'Python Backend Developer', tag:'Backend', desc:'FastAPI, Flask фреймворктері бойынша заманауи веб-жобалар.', teacher:'А. Сейткали' },
-    { id:'c2', name:'SQL Database Administrator', tag:'Database', desc:'PostgreSQL, JOIN сұраныстары және оңтайландыру.', teacher:'Б. Нұрланов' },
-    { id:'c3', name:'Frontend Web Developer', tag:'Frontend', desc:'HTML/CSS/JavaScript — заманауи интерфейстер жасау.', teacher:'С. Қасымов' },
+    { id:'c1', name:'Python Backend Developer', tag:'Backend', desc:'FastAPI, Flask фреймворктері мен Python негіздері.', teacher:'А. Сейткали' },
+    { id:'c2', name:'SQL Database Administrator', tag:'Database', desc:'PostgreSQL, JOIN сұраныстары, оңтайландыру.', teacher:'Б. Нұрланов' },
+    { id:'c3', name:'Frontend Web Developer', tag:'Frontend', desc:'HTML/CSS/JS — заманауи интерфейстер жасау.', teacher:'С. Қасымов' },
     { id:'c4', name:'Cybersecurity Specialist', tag:'Security', desc:'Желілер қауіпсіздігі, этикалық хакинг.', teacher:'А. Досов' },
     { id:'c5', name:'Fullstack Developer', tag:'Fullstack', desc:'Front + Backend бірге, CI/CD және деплой.', teacher:'М. Ерланов' },
   ],
@@ -776,146 +854,305 @@ let db = {
     { time:'15:00', course:'Frontend', topic:'React Hooks', teacher:'С. Қасымов', room:'Lab-201', status:'waiting' },
   ]
 };
+const ADMIN = { login:'admin', pass:'admin123', name:'Администратор' };
 
-let ADMIN = { login:'admin', pass:'admin123', name:'Администратор' };
 let currentUser = null;
 let currentRole = 'student';
+let authMode = 'login';
 let selectedRole = 'student';
 let modalAction = null;
+let toastTimer;
 
 // ══════════════════════════════
-// AUTH
+// БЕТТЕРДІ АУЫСТЫРУ
 // ══════════════════════════════
-function setRole(role, btn) {
-  selectedRole = role;
-  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
 }
 
-function doLogin() {
-  const u = document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value.trim();
-  const err = document.getElementById('loginErr');
+function goAuth(mode) {
+  switchAuthMode(mode);
+  showPage('auth');
+}
 
-  if (selectedRole === 'admin') {
-    if (u === ADMIN.login && p === ADMIN.pass) {
-      currentUser = ADMIN; currentRole = 'admin';
-      document.getElementById('tbUser').textContent = '🔐 ' + ADMIN.name;
-      document.getElementById('adminNav').style.display = 'flex';
-      document.getElementById('studentNav').style.display = 'none';
-      renderAdminDash();
-      show('page-admin');
-      document.getElementById('topbar').style.display = 'block';
-      err.style.display = 'none';
+// ══════════════════════════════
+// АУТЕНТИФИКАЦИЯ РЕЖИМІ
+// ══════════════════════════════
+function switchAuthMode(mode) {
+  authMode = mode;
+  document.getElementById('tab-login').classList.toggle('active', mode === 'login');
+  document.getElementById('tab-register').classList.toggle('active', mode === 'register');
+  document.getElementById('role-select-wrap').style.display = mode === 'login' ? 'block' : 'none';
+  document.getElementById('surnameField').style.display = mode === 'register' ? 'block' : 'none';
+  document.getElementById('courseSelectWrap').style.display = mode === 'register' ? 'block' : 'none';
+  document.getElementById('loginHint').style.display = mode === 'login' ? 'block' : 'none';
+  document.getElementById('registerHint').style.display = mode === 'register' ? 'block' : 'none';
+  document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'Кіру →' : 'Тіркелу →';
+  document.getElementById('authErr').style.display = 'none';
+  document.getElementById('authName').value = '';
+  document.getElementById('authPass').value = '';
+}
+
+function selectRole(role) {
+  selectedRole = role;
+  document.getElementById('role-student').classList.toggle('active', role === 'student');
+  document.getElementById('role-admin').classList.toggle('active', role === 'admin');
+}
+
+// ══════════════════════════════
+// КІРУ / ТІРКЕЛУ
+// ══════════════════════════════
+function submitAuth() {
+  const name = document.getElementById('authName').value.trim();
+  const pass = document.getElementById('authPass').value.trim();
+  const err = document.getElementById('authErr');
+
+  if (!name || !pass) { err.textContent = '❌ Аты мен паролді толтырыңыз!'; err.style.display = 'block'; return; }
+
+  if (authMode === 'login') {
+    // АДМИН
+    if (selectedRole === 'admin') {
+      if (name.toLowerCase() === ADMIN.login && pass === ADMIN.pass) {
+        loginSuccess(null, 'admin');
+      } else {
+        err.textContent = '❌ Әкімші логині немесе пароль қате!';
+        err.style.display = 'block';
+      }
       return;
     }
+    // СТУДЕНТ — кез келген атпен, пароль 1234 немесе базадағы
+    if (pass !== '1234' && pass !== 'admin123') {
+      err.textContent = '❌ Пароль қате! (1234 пайдаланыңыз)';
+      err.style.display = 'block';
+      return;
+    }
+    // Базадан іздеу
+    let stu = db.students.find(s =>
+      s.login === name.toLowerCase() ||
+      s.name.toLowerCase() === name.toLowerCase() ||
+      s.name.toLowerCase().startsWith(name.toLowerCase())
+    );
+    if (!stu) {
+      // Жаңа студент ретінде кіру (кез келген ат)
+      stu = createQuickStudent(name);
+    }
+    loginSuccess(stu, 'student');
+
   } else {
-    const stu = db.students.find(s => s.login === u && s.pass === p);
-    if (stu) {
-      currentUser = stu; currentRole = 'student';
-      document.getElementById('tbUser').textContent = '👤 ' + stu.name.split(' ')[0];
-      document.getElementById('studentNav').style.display = 'flex';
-      document.getElementById('adminNav').style.display = 'none';
-      renderStudentPage();
-      show('page-student');
-      document.getElementById('topbar').style.display = 'block';
-      err.style.display = 'none';
+    // ТІРКЕЛУ
+    if (pass !== '1234') {
+      err.textContent = '❌ Тіркелу паролі: 1234';
+      err.style.display = 'block';
       return;
     }
+    const existing = db.students.find(s => s.name.toLowerCase() === name.toLowerCase());
+    if (existing) {
+      err.textContent = '❌ Бұл аттағы студент бұрыннан бар!';
+      err.style.display = 'block';
+      return;
+    }
+    const cid = document.getElementById('authCourse').value;
+    const course = db.courses.find(c => c.id === cid);
+    const newStu = createQuickStudent(name, cid);
+    loginSuccess(newStu, 'student');
+    showToast('✓ ' + name + ' сәтті тіркелді!', 'success');
   }
-  err.style.display = 'block';
+}
+
+function createQuickStudent(name, cid) {
+  const newId = 'ST-' + String(db.students.length + 1).padStart(3, '0');
+  const login = name.toLowerCase();
+  const course = cid ? db.courses.find(c => c.id === cid) : null;
+  const stu = {
+    id: newId,
+    name: name,
+    login: login,
+    pass: '1234',
+    type: 'Ақылы',
+    status: 'ONLINE',
+    enrolled: cid ? [cid] : [],
+    gpa: cid ? 4.00 : 0,
+    att: cid ? 100 : 0,
+    grades: cid && course ? [{ cid, subj: course.name, r1: 100, r2: 100, exam: 100 }] : []
+  };
+  db.students.push(stu);
+  return stu;
+}
+
+function loginSuccess(stu, role) {
+  currentRole = role;
+  currentUser = stu;
+  document.getElementById('authErr').style.display = 'none';
+  document.getElementById('topbar').style.display = 'block';
+
+  if (role === 'admin') {
+    document.getElementById('tbUser').textContent = '🔐 Администратор';
+    document.getElementById('adminNav').style.display = 'flex';
+    document.getElementById('studentNav').style.display = 'none';
+    renderAdminDash();
+    showPage('admin');
+  } else {
+    document.getElementById('tbUser').textContent = '👤 ' + stu.name.split(' ')[0];
+    document.getElementById('studentNav').style.display = 'flex';
+    document.getElementById('adminNav').style.display = 'none';
+    renderStudentPage();
+    showPage('student');
+  }
 }
 
 function doLogout() {
   currentUser = null;
   document.getElementById('topbar').style.display = 'none';
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
-  document.getElementById('loginErr').style.display = 'none';
-  show('page-login');
-}
-
-function show(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  showPage('landing');
 }
 
 // ══════════════════════════════
-// STUDENT PANEL
+// СТУДЕНТ ПАНЕЛІ
 // ══════════════════════════════
 function renderStudentPage() {
   const s = currentUser;
-  document.getElementById('stuHelloName').textContent = 'Қош келдіңіз, ' + s.name + '!';
-  document.getElementById('stuHelloSub').textContent = 'Студент ID: ' + s.id;
-  document.getElementById('stuGpa').textContent = s.gpa;
-  document.getElementById('stuAtt').textContent = s.att;
-  document.getElementById('stuEnrolledCount').textContent = (s.enrolled||[]).length + ' курс';
-
-  // Courses
-  const grid = document.getElementById('stuCourseGrid');
-  grid.innerHTML = db.courses.map(c => {
-    const enrolled = (s.enrolled||[]).includes(c.id);
-    return `<div class="course-card ${enrolled ? 'enrolled' : ''}" id="cc-${c.id}">
-      <div class="cc-tag ${c.tag==='Frontend'?'gold':c.tag==='Database'?'green':''}">${c.tag}</div>
-      <h4>${c.name}</h4>
-      <p>${c.desc}</p>
-      <span style="font-size:12px;color:var(--muted);">👨‍🏫 ${c.teacher}</span><br><br>
-      ${enrolled
-        ? `<button class="enroll-btn enrolled" disabled>✓ Тіркелді</button>
-           <button class="drop-btn" onclick="dropCourse('${c.id}')">Шығу</button>`
-        : `<button class="enroll-btn" onclick="enrollCourse('${c.id}')">+ Тіркелу</button>`
-      }
-    </div>`;
-  }).join('');
-
-  // Grades
-  const gb = document.getElementById('stuGradesBody');
-  gb.innerHTML = (s.grades||[]).map(g => {
-    const score = parseInt(g.total);
-    const badge = score >= 90 ? 'badge-green' : score >= 75 ? 'badge-blue' : score >= 60 ? 'badge-gold' : 'badge-red';
-    return `<tr><td><b>${g.subj}</b></td><td>${g.r1}</td><td>${g.r2}</td><td>${g.exam}</td><td><b>${g.total}</b></td><td><span class="badge ${badge}">${score>=90?'Өте жақсы':score>=75?'Жақсы':score>=60?'Қанағаттанарлық':'Қайта тапсыру'}</span></td></tr>`;
-  }).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Баға жоқ</td></tr>';
-
-  // Schedule
-  const sb = document.getElementById('stuScheduleBody');
-  sb.innerHTML = db.schedule.map(r => {
-    const bclass = r.status==='active'?'badge-green':r.status==='waiting'?'badge-gold':'badge-red';
-    const blbl = r.status==='active'?'БЕЛСЕНДІ':r.status==='waiting'?'КҮТУДЕ':'АЯҚТАЛДЫ';
-    return `<tr><td>${r.time}</td><td>${r.course}</td><td>${r.topic}</td><td>${r.teacher}</td><td>${r.room}</td><td><span class="badge ${bclass}">${blbl}</span></td></tr>`;
-  }).join('');
+  document.getElementById('stuName').textContent = 'Қош келдіңіз, ' + s.name + '!';
+  document.getElementById('stuId').textContent = 'Студент ID: ' + s.id + '  ·  ' + s.type;
+  document.getElementById('stuGpa').textContent = Number(s.gpa).toFixed(2);
+  document.getElementById('stuAtt').textContent = s.att + '%';
+  document.getElementById('stuCount').textContent = (s.enrolled||[]).length + ' курс';
+  renderCourses();
+  renderGrades();
+  renderSchedule();
 }
 
-function showStudentTab(tab) {
-  document.querySelectorAll('#page-student .admin-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('stu-tab-' + tab).classList.add('active');
-  document.querySelectorAll('#studentNav .tb-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+function renderCourses() {
+  const s = currentUser;
+  document.getElementById('stuCourseGrid').innerHTML = db.courses.map(c => {
+    const ok = (s.enrolled||[]).includes(c.id);
+    const tagClass = c.tag==='Database'?'db':c.tag==='Frontend'?'fe':c.tag==='Security'?'sec':'';
+    return `<div class="course-card ${ok?'enrolled':''}">
+      <div class="cc-tag ${tagClass}">${c.tag}</div>
+      <h4>${c.name}</h4>
+      <p>${c.desc}</p>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:14px;">👨‍🏫 ${c.teacher}</div>
+      <div class="cc-btns">
+        ${ok
+          ? `<button class="enroll-btn done" disabled>✓ Тіркелдіңіз</button>
+             <button class="drop-btn" onclick="dropCourse('${c.id}')">Шығу</button>`
+          : `<button class="enroll-btn" onclick="enrollCourse('${c.id}')">+ Тіркелу</button>`
+        }
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function enrollCourse(cid) {
-  if (!currentUser.enrolled) currentUser.enrolled = [];
-  if (!currentUser.enrolled.includes(cid)) {
-    currentUser.enrolled.push(cid);
-    const course = db.courses.find(c => c.id === cid);
-    currentUser.grades.push({ subj: course.name, r1: 0, r2: 0, exam: 0, total: '0 (—)' });
-    renderStudentPage();
-    document.getElementById('stuEnrolledCount').textContent = currentUser.enrolled.length + ' курс';
-    showToast('✓ ' + course.name + ' курсына тіркелдіңіз!', 'success');
-  }
+  const s = currentUser;
+  if (!s.enrolled) s.enrolled = [];
+  if (s.enrolled.includes(cid)) return;
+  s.enrolled.push(cid);
+  const c = db.courses.find(x => x.id === cid);
+  s.grades.push({ cid, subj: c.name, r1: 0, r2: 0, exam: 0 });
+  recalcGpa();
+  renderStudentPage();
+  showToast('✓ ' + c.name + ' курсына тіркелдіңіз!', 'success');
 }
 
 function dropCourse(cid) {
-  if (!confirm('Бұл курстан шыққыңыз келеді ме?')) return;
-  currentUser.enrolled = (currentUser.enrolled||[]).filter(id => id !== cid);
-  const course = db.courses.find(c => c.id === cid);
-  currentUser.grades = currentUser.grades.filter(g => g.subj !== course.name);
+  if (!confirm('Бұл курстан шығуды растайсыз ба?')) return;
+  const s = currentUser;
+  s.enrolled = s.enrolled.filter(id => id !== cid);
+  s.grades = s.grades.filter(g => g.cid !== cid);
+  recalcGpa();
   renderStudentPage();
-  document.getElementById('stuEnrolledCount').textContent = currentUser.enrolled.length + ' курс';
   showToast('Курстан шықтыңыз', 'danger');
 }
 
+function renderGrades() {
+  const s = currentUser;
+  const body = document.getElementById('stuGradesBody');
+  if (!s.grades.length) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px">Алдымен курсқа тіркеліңіз</td></tr>';
+    return;
+  }
+  body.innerHTML = s.grades.map((g, i) => {
+    const avg = calcAvg(g.r1, g.r2, g.exam);
+    const letter = getLetter(avg);
+    const bclass = avg >= 90 ? 'badge-green' : avg >= 75 ? 'badge-blue' : avg >= 60 ? 'badge-gold' : 'badge-red';
+    const status = avg >= 90 ? 'Өте жақсы' : avg >= 75 ? 'Жақсы' : avg >= 60 ? 'Қанағ.' : 'Қайта тапс.';
+    return `<tr>
+      <td><b>${g.subj}</b></td>
+      <td><input class="grade-input" type="number" min="0" max="100" value="${g.r1}" id="r1-${i}"></td>
+      <td><input class="grade-input" type="number" min="0" max="100" value="${g.r2}" id="r2-${i}"></td>
+      <td><input class="grade-input" type="number" min="0" max="100" value="${g.exam}" id="ex-${i}"></td>
+      <td><b>${avg.toFixed(0)} (${letter})</b></td>
+      <td><span class="badge ${bclass}">${status}</span></td>
+      <td><button class="save-grade-btn" onclick="saveGrade(${i})">💾 Сақтау</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function saveGrade(i) {
+  const s = currentUser;
+  const r1 = Math.min(100, Math.max(0, +document.getElementById('r1-'+i).value || 0));
+  const r2 = Math.min(100, Math.max(0, +document.getElementById('r2-'+i).value || 0));
+  const ex = Math.min(100, Math.max(0, +document.getElementById('ex-'+i).value || 0));
+  s.grades[i].r1 = r1;
+  s.grades[i].r2 = r2;
+  s.grades[i].exam = ex;
+  recalcGpa();
+  renderGrades();
+  document.getElementById('stuGpa').textContent = Number(s.gpa).toFixed(2);
+  showToast('✓ Баға сақталды! GPA жаңартылды', 'success');
+}
+
+function calcAvg(r1, r2, exam) {
+  return r1 * 0.3 + r2 * 0.3 + exam * 0.4;
+}
+
+function getLetter(avg) {
+  if (avg >= 95) return 'A+';
+  if (avg >= 90) return 'A';
+  if (avg >= 85) return 'A-';
+  if (avg >= 80) return 'B+';
+  if (avg >= 75) return 'B';
+  if (avg >= 70) return 'B-';
+  if (avg >= 65) return 'C+';
+  if (avg >= 60) return 'C';
+  return 'F';
+}
+
+function recalcGpa() {
+  const s = currentUser;
+  if (!s.grades.length) { s.gpa = 0; return; }
+  const total = s.grades.reduce((sum, g) => sum + calcAvg(g.r1, g.r2, g.exam), 0);
+  const avg100 = total / s.grades.length;
+  // 100 балдық → 4.0 шкала
+  if (avg100 >= 95) s.gpa = 4.0;
+  else if (avg100 >= 90) s.gpa = 3.9;
+  else if (avg100 >= 85) s.gpa = 3.7;
+  else if (avg100 >= 80) s.gpa = 3.5;
+  else if (avg100 >= 75) s.gpa = 3.2;
+  else if (avg100 >= 70) s.gpa = 3.0;
+  else if (avg100 >= 65) s.gpa = 2.7;
+  else if (avg100 >= 60) s.gpa = 2.5;
+  else s.gpa = 1.0;
+}
+
+function renderSchedule() {
+  document.getElementById('stuScheduleBody').innerHTML = db.schedule.map(r => {
+    const bc = r.status==='active'?'badge-green':r.status==='waiting'?'badge-gold':'badge-red';
+    const bl = r.status==='active'?'БЕЛСЕНДІ':r.status==='waiting'?'КҮТУДЕ':'АЯҚТАЛДЫ';
+    return `<tr><td>${r.time}</td><td>${r.course}</td><td>${r.topic}</td><td>${r.teacher}</td><td>${r.room}</td><td><span class="badge ${bc}">${bl}</span></td></tr>`;
+  }).join('');
+}
+
+function showStudentTab(tab, btn) {
+  document.querySelectorAll('#page-student .admin-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('stu-tab-' + tab).classList.add('active');
+  document.querySelectorAll('#studentNav .tb-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
 // ══════════════════════════════
-// ADMIN PANEL
+// АДМИН ПАНЕЛІ
 // ══════════════════════════════
 function showAdminTab(tab) {
   document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -933,10 +1170,8 @@ function renderAdminDash() {
     <div class="a-stat"><div class="lbl">Студенттер</div><div class="val">${db.students.length}</div></div>
     <div class="a-stat"><div class="lbl">Курстар</div><div class="val">${db.courses.length}</div></div>
     <div class="a-stat"><div class="lbl">Мұғалімдер</div><div class="val">${db.teachers.length}</div></div>
-    <div class="a-stat"><div class="lbl">Белсенді</div><div class="val" style="color:var(--green)">${db.students.filter(s=>s.status==='ONLINE').length}</div></div>
-  `;
-  const last = [...db.students].reverse().slice(0, 5);
-  document.getElementById('dashStudents').innerHTML = buildStuTable(last, false);
+    <div class="a-stat"><div class="lbl">Белсенді</div><div class="val" style="color:var(--green)">${db.students.filter(s=>s.status==='ONLINE').length}</div></div>`;
+  document.getElementById('dashStudents').innerHTML = buildStuTable([...db.students].slice(-5).reverse(), false);
 }
 
 function renderAdminStudents(list) {
@@ -946,164 +1181,133 @@ function renderAdminStudents(list) {
 
 function buildStuTable(list, actions) {
   return `<table class="data-table">
-    <thead><tr><th>ID</th><th>Аты-жөні</th><th>Логин</th><th>Оқу түрі</th><th>Статус</th>${actions?'<th>Әрекет</th>':''}</tr></thead>
+    <thead><tr><th>ID</th><th>Аты-жөні</th><th>Логин</th><th>Оқу түрі</th><th>GPA</th><th>Статус</th>${actions?'<th>Әрекет</th>':''}</tr></thead>
     <tbody>${list.map(s=>`<tr>
       <td style="color:var(--muted)">${s.id}</td>
-      <td><b>${s.name}</b></td>
-      <td>${s.login}</td>
-      <td>${s.type}</td>
+      <td><b>${s.name}</b></td><td>${s.login}</td><td>${s.type}</td>
+      <td style="color:var(--green);font-weight:700">${Number(s.gpa).toFixed(2)}</td>
       <td><span class="badge ${s.status==='ONLINE'?'badge-green':'badge-red'}">${s.status}</span></td>
-      ${actions?`<td><button class="tbl-act danger" onclick="deleteStudent('${s.id}')">🗑 Жою</button></td>`:''}
+      ${actions?`<td><button class="tbl-act danger" onclick="delStudent('${s.id}')">🗑</button></td>`:''}
     </tr>`).join('')}</tbody>
   </table>`;
 }
 
 function filterAdminStudents(q) {
-  const filtered = db.students.filter(s => s.name.toLowerCase().includes(q.toLowerCase()) || s.login.toLowerCase().includes(q.toLowerCase()));
-  document.getElementById('adminStudentsTable').innerHTML = buildStuTable(filtered, true);
+  const f = db.students.filter(s => s.name.toLowerCase().includes(q.toLowerCase()));
+  document.getElementById('adminStudentsTable').innerHTML = buildStuTable(f, true);
 }
 
-function deleteStudent(id) {
-  if (!confirm('Студентті жоюды растайсыз ба?')) return;
+function delStudent(id) {
+  if (!confirm('Студентті жою?')) return;
   db.students = db.students.filter(s => s.id !== id);
   renderAdminStudents();
   renderAdminDash();
   showToast('Студент жойылды', 'danger');
 }
 
-function openAddStudentModal() {
-  modalAction = 'addStudent';
-  document.getElementById('modalTitle').textContent = 'Жаңа Студент Қосу';
-  document.getElementById('modalDesc').textContent = 'Жаңа студенттің мәліметтерін толтырыңыз';
-  document.getElementById('modalBody').innerHTML = `
-    <div class="form-field"><label>Аты-жөні</label><input type="text" id="mName" placeholder="Толық аты-жөні"></div>
-    <div class="form-field"><label>Логин</label><input type="text" id="mLogin" placeholder="login"></div>
-    <div class="form-field"><label>Пароль</label><input type="password" id="mPass" placeholder="Пароль"></div>
-    <div class="form-field"><label>Оқу түрі</label>
-      <select id="mType"><option>Грант</option><option>Ақылы</option></select>
-    </div>`;
-  document.getElementById('modal').classList.add('open');
-}
-
 function renderAdminCourses() {
   document.getElementById('adminCoursesTable').innerHTML = `<table class="data-table">
-    <thead><tr><th>ID</th><th>Атауы</th><th>Бағыт</th><th>Мұғалім</th><th>Сипаттама</th><th>Әрекет</th></tr></thead>
+    <thead><tr><th>ID</th><th>Курс атауы</th><th>Бағыт</th><th>Мұғалім</th><th>Сипаттама</th><th>Әрекет</th></tr></thead>
     <tbody>${db.courses.map(c=>`<tr>
-      <td style="color:var(--muted)">${c.id}</td>
-      <td><b>${c.name}</b></td>
+      <td style="color:var(--muted)">${c.id}</td><td><b>${c.name}</b></td>
       <td><span class="badge badge-blue">${c.tag}</span></td>
-      <td>${c.teacher}</td>
-      <td style="color:var(--muted);font-size:12px">${c.desc}</td>
-      <td><button class="tbl-act danger" onclick="deleteCourse('${c.id}')">🗑 Жою</button></td>
+      <td>${c.teacher}</td><td style="color:var(--muted);font-size:12px">${c.desc}</td>
+      <td><button class="tbl-act danger" onclick="delCourse('${c.id}')">🗑</button></td>
     </tr>`).join('')}</tbody>
   </table>`;
 }
 
-function deleteCourse(id) {
-  if (!confirm('Курсты жоюды растайсыз ба?')) return;
+function delCourse(id) {
+  if (!confirm('Курсты жою?')) return;
   db.courses = db.courses.filter(c => c.id !== id);
   renderAdminCourses();
   showToast('Курс жойылды', 'danger');
-}
-
-function openAddCourseModal() {
-  modalAction = 'addCourse';
-  document.getElementById('modalTitle').textContent = 'Жаңа Курс Қосу';
-  document.getElementById('modalDesc').textContent = 'Курс туралы мәліметтерді толтырыңыз';
-  document.getElementById('modalBody').innerHTML = `
-    <div class="form-field"><label>Курс атауы</label><input type="text" id="mCName" placeholder="Python Backend Developer"></div>
-    <div class="form-field"><label>Бағыт тегі</label><input type="text" id="mCTag" placeholder="Backend, Frontend, Database..."></div>
-    <div class="form-field"><label>Сипаттама</label><input type="text" id="mCDesc" placeholder="Қысқаша сипаттама"></div>
-    <div class="form-field"><label>Мұғалім</label>
-      <select id="mCTeacher">${db.teachers.map(t=>`<option>${t.name}</option>`).join('')}</select>
-    </div>`;
-  document.getElementById('modal').classList.add('open');
 }
 
 function renderAdminTeachers() {
   document.getElementById('adminTeachersTable').innerHTML = `<table class="data-table">
     <thead><tr><th>ID</th><th>Аты-жөні</th><th>Пән</th><th>Статус</th><th>Әрекет</th></tr></thead>
     <tbody>${db.teachers.map(t=>`<tr>
-      <td style="color:var(--muted)">${t.id}</td>
-      <td><b>${t.name}</b></td>
+      <td style="color:var(--muted)">${t.id}</td><td><b>${t.name}</b></td>
       <td>${t.subject}</td>
       <td><span class="badge ${t.status==='Белсенді'?'badge-green':'badge-gold'}">${t.status}</span></td>
-      <td><button class="tbl-act danger" onclick="deleteTeacher('${t.id}')">🗑 Жою</button></td>
+      <td><button class="tbl-act danger" onclick="delTeacher('${t.id}')">🗑</button></td>
     </tr>`).join('')}</tbody>
   </table>`;
 }
 
-function deleteTeacher(id) {
-  if (!confirm('Мұғалімді жоюды растайсыз ба?')) return;
+function delTeacher(id) {
+  if (!confirm('Мұғалімді жою?')) return;
   db.teachers = db.teachers.filter(t => t.id !== id);
   renderAdminTeachers();
   showToast('Мұғалім жойылды', 'danger');
 }
 
-function openAddTeacherModal() {
-  modalAction = 'addTeacher';
-  document.getElementById('modalTitle').textContent = 'Жаңа Мұғалім Қосу';
-  document.getElementById('modalDesc').textContent = 'Мұғалімнің мәліметтерін толтырыңыз';
-  document.getElementById('modalBody').innerHTML = `
-    <div class="form-field"><label>Аты-жөні</label><input type="text" id="mTName" placeholder="А. Иванов"></div>
+// ══════════════════════════════
+// MODAL
+// ══════════════════════════════
+function openModal(action) {
+  modalAction = action;
+  const titles = { addStudent:'Жаңа Студент Қосу', addCourse:'Жаңа Курс Қосу', addTeacher:'Жаңа Мұғалім Қосу' };
+  document.getElementById('modalTitle').textContent = titles[action];
+  document.getElementById('modalDesc').textContent = 'Мәліметтерді толтырыңыз';
+
+  let html = '';
+  if (action === 'addStudent') {
+    html = `<div class="form-field"><label>Аты-жөні</label><input type="text" id="mName" placeholder="Толық аты-жөні"></div>
+    <div class="form-field"><label>Логин</label><input type="text" id="mLogin" placeholder="login"></div>
+    <div class="form-field"><label>Оқу түрі</label><select id="mType"><option>Грант</option><option>Ақылы</option></select></div>`;
+  } else if (action === 'addCourse') {
+    html = `<div class="form-field"><label>Курс атауы</label><input type="text" id="mCName" placeholder="Курс атауы"></div>
+    <div class="form-field"><label>Бағыт тегі</label><input type="text" id="mCTag" placeholder="Backend, Frontend..."></div>
+    <div class="form-field"><label>Сипаттама</label><input type="text" id="mCDesc" placeholder="Қысқаша сипаттама"></div>
+    <div class="form-field"><label>Мұғалім</label><select id="mCTeacher">${db.teachers.map(t=>`<option>${t.name}</option>`).join('')}</select></div>`;
+  } else if (action === 'addTeacher') {
+    html = `<div class="form-field"><label>Аты-жөні</label><input type="text" id="mTName" placeholder="А. Иванов"></div>
     <div class="form-field"><label>Пән</label><input type="text" id="mTSubj" placeholder="Python / FastAPI"></div>
-    <div class="form-field"><label>Статус</label>
-      <select id="mTStatus"><option>Белсенді</option><option>Демалыста</option></select>
-    </div>`;
+    <div class="form-field"><label>Статус</label><select id="mTStatus"><option>Белсенді</option><option>Демалыста</option></select></div>`;
+  }
+  document.getElementById('modalBody').innerHTML = html;
   document.getElementById('modal').classList.add('open');
 }
 
-// ══════════════════════════════
-// MODAL SUBMIT
-// ══════════════════════════════
-function modalSubmitFn() {
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function submitModal() {
   if (modalAction === 'addStudent') {
     const name = document.getElementById('mName').value.trim();
     const login = document.getElementById('mLogin').value.trim();
-    const pass = document.getElementById('mPass').value.trim();
     const type = document.getElementById('mType').value;
-    if (!name || !login || !pass) { showToast('Барлық өрісті толтырыңыз!', 'danger'); return; }
-    const newId = 'ST-' + (1024 + db.students.length);
-    db.students.push({ id:newId, login, pass, name, type, status:'OFFLINE', enrolled:[], gpa:'0.00', att:'0%', grades:[] });
-    closeModal();
-    renderAdminStudents();
-    renderAdminDash();
+    if (!name || !login) { showToast('Барлық өрісті толтырыңыз!', 'danger'); return; }
+    const id = 'ST-' + String(db.students.length + 1).padStart(3,'0');
+    db.students.push({ id, name, login:login.toLowerCase(), pass:'1234', type, status:'OFFLINE', enrolled:[], gpa:0, att:0, grades:[] });
+    closeModal(); renderAdminStudents(); renderAdminDash();
     showToast('✓ ' + name + ' қосылды!', 'success');
-  }
-  else if (modalAction === 'addCourse') {
+  } else if (modalAction === 'addCourse') {
     const name = document.getElementById('mCName').value.trim();
     const tag = document.getElementById('mCTag').value.trim();
     const desc = document.getElementById('mCDesc').value.trim();
     const teacher = document.getElementById('mCTeacher').value;
     if (!name || !tag) { showToast('Атауы мен тегін толтырыңыз!', 'danger'); return; }
-    const newId = 'c' + (db.courses.length + 1);
-    db.courses.push({ id:newId, name, tag, desc:desc||'', teacher });
-    closeModal();
-    renderAdminCourses();
+    const id = 'c' + (db.courses.length + 1);
+    db.courses.push({ id, name, tag, desc:desc||'', teacher });
+    closeModal(); renderAdminCourses();
     showToast('✓ ' + name + ' курсы қосылды!', 'success');
-  }
-  else if (modalAction === 'addTeacher') {
+  } else if (modalAction === 'addTeacher') {
     const name = document.getElementById('mTName').value.trim();
     const subj = document.getElementById('mTSubj').value.trim();
     const status = document.getElementById('mTStatus').value;
-    if (!name || !subj) { showToast('Аты мен пәнін толтырыңыз!', 'danger'); return; }
-    const newId = 'T-0' + (db.teachers.length + 1);
-    db.teachers.push({ id:newId, name, subject:subj, status });
-    closeModal();
-    renderAdminTeachers();
+    if (!name || !subj) { showToast('Мәліметтерді толтырыңыз!', 'danger'); return; }
+    const id = 'T-' + String(db.teachers.length + 1).padStart(2,'0');
+    db.teachers.push({ id, name, subject:subj, status });
+    closeModal(); renderAdminTeachers();
     showToast('✓ ' + name + ' қосылды!', 'success');
   }
-}
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  modalAction = null;
 }
 
 // ══════════════════════════════
 // TOAST
 // ══════════════════════════════
-let toastTimer;
 function showToast(msg, type='success') {
   const t = document.getElementById('toast');
   t.textContent = msg;
