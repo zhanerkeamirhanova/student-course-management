@@ -30,6 +30,8 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
 /* ─── PAGES ─── */
 .page { display:none; min-height:100vh; }
 .page.active { display:block; }
+/* Админ беті белсенді болғанда flex болып ашылуы керек */
+#page-admin.active { display: flex !important; }
 
 /* ══════════════════════════════
    LANDING (БАС БЕТ)
@@ -458,7 +460,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
 /* ══════════════════════════════
    ADMIN PANEL
 ══════════════════════════════ */
-#page-admin { display:none; min-height:calc(100vh - 62px); background:var(--bg); }
+#page-admin { display:none; min-height:calc(100vh - 62px); background:var(--bg); width: 100%; }
 .admin-sidebar {
   width:230px; background:var(--navy); min-height:calc(100vh - 62px);
   padding:24px 12px; flex-shrink:0; position:sticky; top:62px;
@@ -473,8 +475,8 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   text-align:left; font-family:'DM Sans',sans-serif; transition:all .2s; margin-bottom:2px;
 }
 .sb-btn:hover, .sb-btn.active { background:rgba(255,255,255,.08); color:#e2e8f0; }
-.sb-btn.active { color:#60a5fa; }
-.admin-content { flex:1; padding:32px; overflow-y:auto; }
+.sb-btn.active { color:#60a5fa; background:rgba(255,255,255,.05); }
+.admin-content { flex:1; padding:32px; overflow-y:auto; background: var(--bg); }
 .admin-tab { display:none; }
 .admin-tab.active { display:block; }
 
@@ -549,6 +551,9 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
 </head>
 <body>
 
+<!-- ══════════════════════════════
+     БАС БЕТ (LANDING)
+══════════════════════════════ -->
 <div id="page-landing" class="page active">
   <nav class="land-nav">
     <div class="land-logo">EduTrack<span>.</span></div>
@@ -593,17 +598,22 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   <div class="land-footer">©️ 2026 EduTrack — Студент Курс Жүйесі. Barklyq quqyqtar qorgalgan.</div>
 </div>
 
+<!-- ══════════════════════════════
+     ЛОГИН / ТІРКЕЛУ БЕТІ
+══════════════════════════════ -->
 <div id="page-auth" class="page">
   <div class="auth-card">
     <button class="auth-back" onclick="showPage('landing')">← Бас бетке</button>
     <div class="auth-logo">EduTrack<span>.</span></div>
     <div class="auth-subtitle">Оқу платформасына қош келдіңіз</div>
 
+    <!-- Кіру / Тіркелу табтары -->
     <div class="auth-mode-tabs">
       <button class="auth-tab active" id="tab-login" onclick="switchAuthMode('login')">🔑 Кіру</button>
       <button class="auth-tab" id="tab-register" onclick="switchAuthMode('register')">📝 Тіркелу</button>
     </div>
 
+    <!-- Рөл таңдау (тек Кіру кезінде) -->
     <div id="role-select-wrap">
       <div class="role-tabs">
         <button class="role-tab active" id="role-student" onclick="selectRole('student')">👤 Студент</button>
@@ -611,6 +621,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
       </div>
     </div>
 
+    <!-- Форма өрістері -->
     <div class="form-field">
       <label>Аты-жөні / Логин</label>
       <input type="text" id="authName" placeholder="Атыңызды жазыңыз..." onkeydown="if(event.key==='Enter')submitAuth()">
@@ -639,6 +650,9 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   </div>
 </div>
 
+<!-- ══════════════════════════════
+     TOPBAR
+══════════════════════════════ -->
 <div id="topbar">
   <div class="topbar">
     <div class="tb-logo">EduTrack<span>.</span></div>
@@ -648,10 +662,10 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
       <button class="tb-btn" onclick="showStudentTab('schedule',this)">🗓 Кесте</button>
     </div>
     <div class="tb-nav" id="adminNav" style="display:none">
-      <button class="tb-btn active" onclick="showAdminTab('dashboard')">📊 Дашборд</button>
-      <button class="tb-btn" onclick="showAdminTab('students')">👥 Студенттер</button>
-      <button class="tb-btn" onclick="showAdminTab('courses')">📚 Курстар</button>
-      <button class="tb-btn" onclick="showAdminTab('teachers')">👨‍🏫 Мұғалімдер</button>
+      <button class="tb-btn active" id="tb-adm-dash" onclick="showAdminTab('dashboard')">📊 Дашборд</button>
+      <button class="tb-btn" id="tb-adm-stu" onclick="showAdminTab('students')">👥 Студенттер</button>
+      <button class="tb-btn" id="tb-adm-crs" onclick="showAdminTab('courses')">📚 Курстар</button>
+      <button class="tb-btn" id="tb-adm-tch" onclick="showAdminTab('teachers')">👨‍🏫 Мұғалімдер</button>
     </div>
     <div class="tb-right">
       <div class="tb-user" id="tbUser"></div>
@@ -660,6 +674,9 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   </div>
 </div>
 
+<!-- ══════════════════════════════
+     СТУДЕНТ ПАНЕЛІ
+══════════════════════════════ -->
 <div id="page-student" class="page">
   <div class="student-hero">
     <div class="student-hero-inner">
@@ -674,12 +691,14 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   </div>
 
   <div class="s-body">
+    <!-- Курстар -->
     <div id="stu-tab-courses" class="admin-tab active">
       <div class="s-section-title">Barlyq Kurstar</div>
       <div class="s-section-sub">Курсқа тіркеліп немесе одан шығыңыз</div>
       <div class="course-grid" id="stuCourseGrid"></div>
     </div>
 
+    <!-- Үлгерім -->
     <div id="stu-tab-grades" class="admin-tab">
       <div class="s-section-title">Оқу Үлгерімі</div>
       <div class="s-section-sub">Бағаларды өзгертіп «Сақтау» батырмасын басыңыз — GPA автоматты есептеледі</div>
@@ -691,6 +710,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
       </div>
     </div>
 
+    <!-- Кесте -->
     <div id="stu-tab-schedule" class="admin-tab">
       <div class="s-section-title">Апталық Кесте</div>
       <div class="s-section-sub">Ағымдағы сабақтар</div>
@@ -704,26 +724,31 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   </div>
 </div>
 
+<!-- ══════════════════════════════
+     АДМИН ПАНЕЛІ (ФИКС КҮЙІНДЕ)
+══════════════════════════════ -->
 <div id="page-admin" class="page">
   <div class="admin-sidebar">
     <div class="sb-section">
       <div class="sb-label">Негізгі</div>
-      <button class="sb-btn active" onclick="showAdminTab('dashboard')"><span>📊</span> Дашборд</button>
+      <button class="sb-btn active" id="sb-dash" onclick="showAdminTab('dashboard')"><span>📊</span> Дашборд</button>
     </div>
     <div class="sb-section">
       <div class="sb-label">Басқару</div>
-      <button class="sb-btn" onclick="showAdminTab('students')"><span>👥</span> Студенттер</button>
-      <button class="sb-btn" onclick="showAdminTab('courses')"><span>📚</span> Курстар</button>
-      <button class="sb-btn" onclick="showAdminTab('teachers')"><span>👨‍🏫</span> Мұғалімдер</button>
+      <button class="sb-btn" id="sb-students" onclick="showAdminTab('students')"><span>👥</span> Студенттер</button>
+      <button class="sb-btn" id="sb-courses" onclick="showAdminTab('courses')"><span>📚</span> Курстар</button>
+      <button class="sb-btn" id="sb-teachers" onclick="showAdminTab('teachers')"><span>👨‍🏫</span> Мұғалімдер</button>
     </div>
   </div>
   <div class="admin-content">
+    <!-- Дашборд -->
     <div id="admin-tab-dashboard" class="admin-tab active">
       <div class="a-head"><h2>Дашборд</h2><p>EduTrack жүйесінің жалпы шолуы</p></div>
       <div class="a-stats" id="adminStats"></div>
       <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--navy);margin-bottom:14px;">Соңғы студенттер</div>
       <div class="data-table-wrap" id="dashStudents"></div>
     </div>
+    <!-- Студенттер -->
     <div id="admin-tab-students" class="admin-tab">
       <div class="a-head"><h2>Студенттер</h2><p>Қосу, іздеу, жою</p></div>
       <div class="a-toolbar">
@@ -732,6 +757,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
       </div>
       <div class="data-table-wrap" id="adminStudentsTable"></div>
     </div>
+    <!-- Курстар -->
     <div id="admin-tab-courses" class="admin-tab">
       <div class="a-head"><h2>Курстар</h2><p>Курстарды қосу немесе жою</p></div>
       <div class="a-toolbar">
@@ -740,6 +766,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
       </div>
       <div class="data-table-wrap" id="adminCoursesTable"></div>
     </div>
+    <!-- Мұғалімдер -->
     <div id="admin-tab-teachers" class="admin-tab">
       <div class="a-head"><h2>Мұғалімдер</h2><p>Қосу немесе жою</p></div>
       <div class="a-toolbar">
@@ -751,6 +778,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text)
   </div>
 </div>
 
+<!-- ══════ MODAL ══════ -->
 <div class="modal-bg" id="modal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -789,7 +817,7 @@ let db = {
       grades:[{ cid:'c4', subj:'Cybersecurity Specialist', r1:90, r2:92, exam:88 }]},
   ],
   courses: [
-    { id:'c1', name:'Python Backend Developer', tag:'Backend', desc:'FastAPI, Flask фреймворктері мен Python негіздері.', teacher:'А. Сейткали' },
+    { id:'c1', name:'Python Backend Developer', tag:'Backend', desc:'FastAPI, Flask фреймворктері мен Python неғидері.', teacher:'А. Сейткали' },
     { id:'c2', name:'SQL Database Administrator', tag:'Database', desc:'PostgreSQL, JOIN сұраныстары, оңтайландыру.', teacher:'Б. Нұрланов' },
     { id:'c3', name:'Frontend Web Developer', tag:'Frontend', desc:'HTML/CSS/JS — заманауи интерфейстер жасау.', teacher:'С. Қасымов' },
     { id:'c4', name:'Cybersecurity Specialist', tag:'Security', desc:'Желілер қауіпсіздігі, этикалық хакинг.', teacher:'А. Досов' },
@@ -819,14 +847,14 @@ let modalAction = null;
 let toastTimer;
 
 // ══════════════════════════════
-// БЕТТЕРДІ АУЫСТЫРУ (ТҮЗЕТІЛДІ)
+// БЕТТЕРДІ АУЫСТЫРУ
 // ══════════════════════════════
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const targetPage = document.getElementById('page-' + name);
   if (targetPage) {
     targetPage.classList.add('active');
-    window.scrollTo(0, 0); // Бет ауысқанда жоғарыға жылжыту
+    window.scrollTo(0, 0);
   }
 }
 
@@ -932,8 +960,8 @@ function loginSuccess(stu, role) {
     document.getElementById('tbUser').textContent = '🔐 Администратор';
     document.getElementById('adminNav').style.display = 'flex';
     document.getElementById('studentNav').style.display = 'none';
-    renderAdminDash();
     showPage('admin');
+    showAdminTab('dashboard'); // Ішкі бөлімдерді іске қосу
   } else {
     document.getElementById('tbUser').textContent = '👤 ' + stu.name.split(' ')[0];
     document.getElementById('studentNav').style.display = 'flex';
@@ -1015,7 +1043,7 @@ function renderGrades() {
     return;
   }
   body.innerHTML = s.grades.map((g, i) => {
-    const avg = calcAvg(g.r1, g.r2, g.exam);
+    const avg = g.r1 * 0.3 + g.r2 * 0.3 + g.exam * 0.4;
     const letter = getLetter(avg);
     const bclass = avg >= 90 ? 'badge-green' : avg >= 75 ? 'badge-blue' : avg >= 60 ? 'badge-gold' : 'badge-red';
     const status = avg >= 90 ? 'Өте жақсы' : avg >= 75 ? 'Жақсы' : avg >= 60 ? 'Қанағ.' : 'Қайта тапс.';
@@ -1045,37 +1073,20 @@ function saveGrade(i) {
   showToast('✓ Баға сақталды! GPA жаңартылды', 'success');
 }
 
-function calcAvg(r1, r2, exam) {
-  return r1 * 0.3 + r2 * 0.3 + exam * 0.4;
-}
-
-// Таза 4.0 шкаласына ауыстыру
 function getLetter(avg) {
-  if (avg >= 95) return 'A+';
-  if (avg >= 90) return 'A';
-  if (avg >= 85) return 'A-';
-  if (avg >= 80) return 'B+';
-  if (avg >= 75) return 'B';
-  if (avg >= 70) return 'B-';
-  if (avg >= 65) return 'C+';
-  if (avg >= 60) return 'C';
-  return 'F';
+  if (avg >= 95) return 'A+'; if (avg >= 90) return 'A'; if (avg >= 85) return 'A-';
+  if (avg >= 80) return 'B+'; if (avg >= 75) return 'B'; if (avg >= 70) return 'B-';
+  if (avg >= 65) return 'C+'; if (avg >= 60) return 'C'; return 'F';
 }
 
 function recalcGpa() {
   const s = currentUser;
   if (!s.grades.length) { s.gpa = 0; return; }
-  const total = s.grades.reduce((sum, g) => sum + calcAvg(g.r1, g.r2, g.exam), 0);
+  const total = s.grades.reduce((sum, g) => sum + (g.r1*0.3 + g.r2*0.3 + g.exam*0.4), 0);
   const avg100 = total / s.grades.length;
-  if (avg100 >= 95) s.gpa = 4.0;
-  else if (avg100 >= 90) s.gpa = 3.9;
-  else if (avg100 >= 85) s.gpa = 3.7;
-  else if (avg100 >= 80) s.gpa = 3.5;
-  else if (avg100 >= 75) s.gpa = 3.2;
-  else if (avg100 >= 70) s.gpa = 3.0;
-  else if (avg100 >= 65) s.gpa = 2.7;
-  else if (avg100 >= 60) s.gpa = 2.5;
-  else s.gpa = 1.0;
+  if (avg100 >= 95) s.gpa = 4.0; else if (avg100 >= 90) s.gpa = 3.9; else if (avg100 >= 85) s.gpa = 3.7;
+  else if (avg100 >= 80) s.gpa = 3.5; else if (avg100 >= 75) s.gpa = 3.2; else if (avg100 >= 70) s.gpa = 3.0;
+  else if (avg100 >= 65) s.gpa = 2.7; else if (avg100 >= 60) s.gpa = 2.5; else s.gpa = 1.0;
 }
 
 function renderSchedule() {
@@ -1094,13 +1105,27 @@ function showStudentTab(tab, btn) {
 }
 
 // ══════════════════════════════
-// АДМИН ПАНЕЛІ
+// АДМИН ПАНЕЛІ (АУЫСУ ТҮЗЕТІЛДІ)
 // ══════════════════════════════
 function showAdminTab(tab) {
-  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('admin-tab-' + tab).classList.add('active');
-  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
+  // Барлық контент қойындыларын жабу
+  document.querySelectorAll('.admin-content .admin-tab').forEach(t => t.classList.remove('active'));
+  // Қажетті қойындыны ашу
+  const targetTab = document.getElementById('admin-tab-' + tab);
+  if (targetTab) targetTab.classList.add('active');
+
+  // Сол жақтағы бүйірлік мәзір белсенділігі
+  document.querySelectorAll('.admin-sidebar .sb-btn').forEach(b => b.classList.remove('active'));
+  const sbBtn = document.getElementById('sb-' + (tab === 'dashboard' ? 'dash' : tab));
+  if (sbBtn) sbBtn.classList.add('active');
+
+  // Үстіңгі мәзір (Topbar) белсенділігі
   document.querySelectorAll('#adminNav .tb-btn').forEach(b => b.classList.remove('active'));
+  const tbMap = { dashboard: 'tb-adm-dash', students: 'tb-adm-stu', courses: 'tb-adm-crs', teachers: 'tb-adm-tch' };
+  const tbBtn = document.getElementById(tbMap[tab]);
+  if (tbBtn) tbBtn.classList.add('active');
+
+  // Сәйкес мәліметтерді қайта салу
   if (tab === 'dashboard') renderAdminDash();
   if (tab === 'students') renderAdminStudents();
   if (tab === 'courses') renderAdminCourses();
